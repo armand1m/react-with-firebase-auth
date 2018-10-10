@@ -10,7 +10,8 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-firebase-hoc": "file:..",
-    "react-scripts": "^1.1.4"
+    "react-scripts": "^1.1.4",
+    "recompose": "^0.30.0"
   },
   "scripts": {
     "start": "react-scripts start",

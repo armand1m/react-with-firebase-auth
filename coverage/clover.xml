@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1539125688612" clover="3.2.0">
+  <project timestamp="1539125688612" name="All files">
+    <metrics statements="30" coveredstatements="29" conditionals="3" coveredconditionals="3" methods="21" coveredmethods="17" elements="54" coveredelements="49" complexity="0" loc="30" ncloc="30" packages="1" files="3" classes="3">
+      <file name="firebase-config.ts" path="/home/armando/perry-js/react-firebase-hoc/react-firebase-hoc/src/firebase-config.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+      <file name="index.tsx" path="/home/armando/perry-js/react-firebase-hoc/react-firebase-hoc/src/index.tsx">
+        <metrics statements="26" coveredstatements="25" conditionals="3" coveredconditionals="3" methods="21" coveredmethods="17"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="6" type="stmt"/>
+        <line num="20" count="6" type="cond" truecount="3" falsecount="0"/>
+        <line num="21" count="6" type="stmt"/>
+        <line num="26" count="6" type="stmt"/>
+        <line num="27" count="6" type="stmt"/>
+        <line num="28" count="6" type="stmt"/>
+        <line num="32" count="6" type="stmt"/>
+        <line num="34" count="4" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="40" count="6" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="43" count="6" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="46" count="6" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="49" count="6" type="stmt"/>
+        <line num="50" count="1" type="stmt"/>
+        <line num="52" count="6" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="55" count="6" type="stmt"/>
+        <line num="56" count="13" type="stmt"/>
+        <line num="71" count="13" type="stmt"/>
+        <line num="73" count="6" type="stmt"/>
+        <line num="76" count="1" type="stmt"/>
+      </file>
+      <file name="setupTests.ts" path="/home/armando/perry-js/react-firebase-hoc/react-firebase-hoc/src/setupTests.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+      </file>
+    </metrics>
+  </project>
+</coverage>

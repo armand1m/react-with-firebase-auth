@@ -16,7 +16,7 @@ testAppAuth.createUserWithEmailAndPassword = jest.fn();
 // testAppAuth.signInWithGithub = jest.fn();
 // testAppAuth.signInWithTwitter = jest.fn();
 testAppAuth.signInAnonymously = jest.fn();
-testAppAuth.signOut = jest.fn().mockRejectedValue(new Error('test-error'));
+testAppAuth.signOut = jest.fn();
 
 describe('withFirebaseAuth', () => {
   it('should be a function', () => {
@@ -26,7 +26,9 @@ describe('withFirebaseAuth', () => {
   it('should render WrappedComponent', () => {
     const WrappedComponent = () => <div>ama wrapped</div>;
 
-    const EnhancedComponent = withFirebaseAuth(testAppAuth)(WrappedComponent);
+    const EnhancedComponent = withFirebaseAuth({
+      firebaseAppAuth: testAppAuth,
+    })(WrappedComponent);
     const wrapped = shallow(<EnhancedComponent />);
 
     expect(wrapped.find(WrappedComponent).exists()).toBeTruthy();
@@ -36,7 +38,9 @@ describe('withFirebaseAuth', () => {
     const WrappedComponent = ({ signInAnonymously }: WrappedComponentProps) =>
       <button onClick={signInAnonymously}>signInAnonymously</button>;
 
-    const EnhancedComponent = withFirebaseAuth(testAppAuth)(WrappedComponent);
+    const EnhancedComponent = withFirebaseAuth({
+      firebaseAppAuth: testAppAuth,
+    })(WrappedComponent);
     const wrapped = mount(<EnhancedComponent />);
 
     wrapped.find('button').simulate('click');
@@ -48,7 +52,9 @@ describe('withFirebaseAuth', () => {
     const WrappedComponent = ({ signOut }: WrappedComponentProps) =>
       <button onClick={signOut}>signOut</button>;
 
-    const EnhancedComponent = withFirebaseAuth(testAppAuth)(WrappedComponent);
+    const EnhancedComponent = withFirebaseAuth({
+      firebaseAppAuth: testAppAuth,
+    })(WrappedComponent);
     const wrapped = mount(<EnhancedComponent />);
 
     wrapped.find('button').simulate('click');
@@ -60,7 +66,9 @@ describe('withFirebaseAuth', () => {
     const WrappedComponent = ({ signInWithEmailAndPassword }: WrappedComponentProps) =>
       <button onClick={() => signInWithEmailAndPassword('test', 'test')}>signInWithEmailAndPassword</button>;
 
-    const EnhancedComponent = withFirebaseAuth(testAppAuth)(WrappedComponent);
+    const EnhancedComponent = withFirebaseAuth({
+      firebaseAppAuth: testAppAuth,
+    })(WrappedComponent);
     const wrapped = mount(<EnhancedComponent />);
 
     wrapped.find('button').simulate('click');
@@ -72,7 +80,9 @@ describe('withFirebaseAuth', () => {
     const WrappedComponent = ({ createUserWithEmailAndPassword }: WrappedComponentProps) =>
       <button onClick={() => createUserWithEmailAndPassword('test', 'test')}>createUserWithEmailAndPassword</button>;
 
-    const EnhancedComponent = withFirebaseAuth(testAppAuth)(WrappedComponent);
+    const EnhancedComponent = withFirebaseAuth({
+      firebaseAppAuth: testAppAuth,
+    })(WrappedComponent);
     const wrapped = mount(<EnhancedComponent />);
 
     wrapped.find('button').simulate('click');
@@ -88,27 +98,13 @@ describe('withFirebaseAuth', () => {
       </>
     );
 
-    const EnhancedComponent = withFirebaseAuth(testAppAuth)(WrappedComponent);
+    const EnhancedComponent = withFirebaseAuth({
+      firebaseAppAuth: testAppAuth,
+    })(WrappedComponent);
     const wrapped = mount(<EnhancedComponent />);
 
     expect(wrapped.find('span').text()).toBe('');
     wrapped.find('button').simulate('click');
     expect(wrapped.find('span').text()).toBe('test-error');
-  });
-
-  it('should set an error when some operation fails', () => {
-    const WrappedComponent = ({ signOut, error }: WrappedComponentProps) => (
-      <div>
-        <button onClick={signOut}>signOut</button>
-        <span>{error}</span>
-      </div>
-    );
-
-    const EnhancedComponent = withFirebaseAuth(testAppAuth)(WrappedComponent);
-    const wrapped = mount(<EnhancedComponent />);
-
-    expect(wrapped.find('span').text()).toBe('');
-    wrapped.find('button').simulate('click');
-    expect(wrapped.update().find('span').text()).toBe('test-error');
   });
 });

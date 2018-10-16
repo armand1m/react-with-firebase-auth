@@ -15,10 +15,12 @@ const FormWrapper = ({ children }) =>
 const App = ({
   user,
   error,
-  clearError,
+  setError,
   signOut,
   signInAnonymously,
   signInWithEmailAndPassword,
+  signInWithGoogle,
+  signInWithGithub,
   createUserWithEmailAndPassword,
 }) => (
   <React.Fragment>
@@ -38,6 +40,16 @@ const App = ({
     </FormWrapper>
 
     <FormWrapper>
+      <h1>sign in with google</h1>
+      <button onClick={signInWithGoogle}>sign in with google</button>
+    </FormWrapper>
+
+    <FormWrapper>
+      <h1>sign in with github (disabled but good to see error message)</h1>
+      <button onClick={signInWithGithub}>sign in with github</button>
+    </FormWrapper>
+
+    <FormWrapper>
       <h1>sign out</h1>
       <button onClick={signOut}>sign out</button>
     </FormWrapper>
@@ -54,9 +66,18 @@ const App = ({
 
     <FormWrapper>
       <h1>clear error</h1>
-      <button onClick={clearError}>clear error</button>
+      <button onClick={() => setError(null)}>clear error</button>
     </FormWrapper>
   </React.Fragment>
 );
 
-export default withFirebaseAuth(firebaseApp.auth())(App);
+const firebaseAppAuth = firebaseApp.auth();
+
+const providers = {
+  googleProvider: new firebase.auth.GoogleAuthProvider(),
+};
+
+export default withFirebaseAuth({
+  providers,
+  firebaseAppAuth,
+})(App);

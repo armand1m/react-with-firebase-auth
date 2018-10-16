@@ -1,6 +1,8 @@
 import * as React from 'react';
 import * as firebase from 'firebase';
 
+import getErrorMessageForProvider from './get-error-message-for-provider';
+
 export type WrappedComponentProps = {
   signInWithEmailAndPassword: (email: string, password: string) => void;
   createUserWithEmailAndPassword: (email: string, password: string) => void;
@@ -15,7 +17,28 @@ export type WrappedComponentProps = {
   error?: firebase.FirebaseError;
 };
 
-const withFirebaseAuth = (firebaseAppAuth: firebase.auth.Auth) =>
+export type PossibleProviders =
+  'googleProvider'
+  | 'facebookProvider'
+  | 'twitterProvider'
+  | 'githubProvider';
+
+export type ProvidersMapper = {
+  googleProvider?: firebase.auth.GithubAuthProvider_Instance;
+  facebookProvider?: firebase.auth.FacebookAuthProvider_Instance;
+  twitterProvider?: firebase.auth.TwitterAuthProvider_Instance;
+  githubProvider?:  firebase.auth.GithubAuthProvider_Instance;
+};
+
+export type HocParameters = {
+  firebaseAppAuth: firebase.auth.Auth,
+  providers?: ProvidersMapper
+};
+
+const withFirebaseAuth = ({
+  firebaseAppAuth,
+  providers = {},
+}: HocParameters) =>
   (WrappedComponent: React.SFC<WrappedComponentProps>) => {
     return class FirebaseAuthProvider extends React.PureComponent {
       state = {
@@ -29,8 +52,7 @@ const withFirebaseAuth = (firebaseAppAuth: firebase.auth.Auth) =>
         });
       }
 
-      setError = (error: any) =>
-        this.setState({ error });
+      setError = (error: any) => this.setState({ error });
 
       tryTo = async (operation: () => void) => {
         try {
@@ -40,27 +62,38 @@ const withFirebaseAuth = (firebaseAppAuth: firebase.auth.Auth) =>
         }
       }
 
-      createUserWithEmailAndPassword = (email: string, password: string) =>
-        this.tryTo(() => firebaseAppAuth.createUserWithEmailAndPassword(email, password));
+      tryToSignInWithProvider = (provider: PossibleProviders) =>
+        this.tryTo(() => {
+          const providerInstance = providers[provider];
+
+          if (!providerInstance) {
+            throw new Error(getErrorMessageForProvider(provider));
+          }
+
+          firebaseAppAuth.signInWithPopup(providerInstance);
+        });
+
+      signOut = () => this.tryTo(() => firebaseAppAuth.signOut());
+      signInAnonymously = () => this.tryTo(() => firebaseAppAuth.signInAnonymously());
+      signInWithGithub = () => this.tryToSignInWithProvider('githubProvider');
+      signInWithTwitter = () => this.tryToSignInWithProvider('twitterProvider')
+      signInWithGoogle = () => this.tryToSignInWithProvider('googleProvider')
+      signInWithFacebook = () => this.tryToSignInWithProvider('facebookProvider')
 
       signInWithEmailAndPassword = (email: string, password: string) =>
         this.tryTo(() => firebaseAppAuth.signInWithEmailAndPassword(email, password));
 
-      signOut = () =>
-        this.tryTo(() => firebaseAppAuth.signOut());
-
-      signInAnonymously = () =>
-        this.tryTo(() => firebaseAppAuth.signInAnonymously());
+      createUserWithEmailAndPassword = (email: string, password: string) =>
+        this.tryTo(() => firebaseAppAuth.createUserWithEmailAndPassword(email, password));
 
       render() {
         const props = {
           signInWithEmailAndPassword: this.signInWithEmailAndPassword,
           createUserWithEmailAndPassword: this.createUserWithEmailAndPassword,
-          /** TODO: plz implement these methods, think about something for the providers, you can do it */
-          signInWithGoogle: () => {},
-          signInWithFacebook: () => {},
-          signInWithGithub: () => {},
-          signInWithTwitter: () => {},
+          signInWithGithub: this.signInWithGithub,
+          signInWithTwitter: this.signInWithTwitter,
+          signInWithGoogle: this.signInWithGoogle,
+          signInWithFacebook: this.signInWithFacebook,
           setError: this.setError,
           signInAnonymously: this.signInAnonymously,
           signOut: this.signOut,

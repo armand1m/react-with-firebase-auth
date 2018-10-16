@@ -41,6 +41,7 @@ const withFirebaseAuth = ({
 }: HocParameters) =>
   (WrappedComponent: React.SFC<WrappedComponentProps>) => {
     return class FirebaseAuthProvider extends React.PureComponent {
+      static displayName = `withFirebaseAuth(${WrappedComponent.displayName || WrappedComponent.name})`
       state = {
         user: undefined,
         error: undefined,
@@ -88,6 +89,7 @@ const withFirebaseAuth = ({
 
       render() {
         const props = {
+          ...this.props,
           signInWithEmailAndPassword: this.signInWithEmailAndPassword,
           createUserWithEmailAndPassword: this.createUserWithEmailAndPassword,
           signInWithGithub: this.signInWithGithub,

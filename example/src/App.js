@@ -1,6 +1,6 @@
 import React from 'react'
 import * as firebase from 'firebase';
-import withFirebaseAuth from 'react-firebase-hoc'
+import withFirebaseAuth from 'react-with-firebase-auth'
 import firebaseConfig from './firebaseConfig';
 import UserForm from './UserForm';
 

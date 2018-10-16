@@ -1,6 +1,6 @@
 {
-  "name": "react-firebase-hoc-example",
-  "homepage": "https://armand1m.github.io/react-firebase-hoc",
+  "name": "react-with-firebase-auth-example",
+  "homepage": "https://armand1m.github.io/react-with-firebase-auth",
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
@@ -9,7 +9,7 @@
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-firebase-hoc": "file:..",
+    "react-with-firebase-auth": "file:..",
     "react-scripts": "^1.1.4",
     "recompose": "^0.30.0"
   },

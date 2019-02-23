@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1539649578726" clover="3.2.0">
-  <project timestamp="1539649578726" name="All files">
-    <metrics statements="45" coveredstatements="38" conditionals="7" coveredconditionals="4" methods="24" coveredmethods="17" elements="76" coveredelements="59" complexity="0" loc="45" ncloc="45" packages="1" files="4" classes="4">
-      <file name="firebase-config.ts" path="/home/armando/perry-js/react-firebase-hoc/react-firebase-hoc/src/firebase-config.ts">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
-      </file>
-      <file name="get-error-message-for-provider.ts" path="/home/armando/perry-js/react-firebase-hoc/react-firebase-hoc/src/get-error-message-for-provider.ts">
+<coverage generated="1550928514609" clover="3.2.0">
+  <project timestamp="1550928514610" name="All files">
+    <metrics statements="50" coveredstatements="47" conditionals="9" coveredconditionals="8" methods="24" coveredmethods="23" elements="83" coveredelements="78" complexity="0" loc="50" ncloc="50" packages="1" files="3" classes="3">
+      <file name="get-error-message-for-provider.ts" path="/home/armando/Projects/react-with-firebase-auth/src/get-error-message-for-provider.ts">
         <metrics statements="5" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="3" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
@@ -14,46 +10,52 @@
         <line num="18" count="0" type="stmt"/>
         <line num="20" count="1" type="stmt"/>
       </file>
-      <file name="index.tsx" path="/home/armando/perry-js/react-firebase-hoc/react-firebase-hoc/src/index.tsx">
-        <metrics statements="36" coveredstatements="30" conditionals="7" coveredconditionals="4" methods="23" coveredmethods="17"/>
+      <file name="index.tsx" path="/home/armando/Projects/react-with-firebase-auth/src/index.tsx">
+        <metrics statements="42" coveredstatements="40" conditionals="9" coveredconditionals="8" methods="23" coveredmethods="23"/>
         <line num="1" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
         <line num="38" count="1" type="stmt"/>
-        <line num="39" count="6" type="stmt"/>
-        <line num="40" count="12" type="cond" truecount="1" falsecount="1"/>
-        <line num="42" count="6" type="stmt"/>
-        <line num="43" count="6" type="cond" truecount="3" falsecount="0"/>
-        <line num="44" count="6" type="stmt"/>
-        <line num="49" count="6" type="stmt"/>
-        <line num="50" count="6" type="stmt"/>
-        <line num="51" count="6" type="stmt"/>
-        <line num="55" count="6" type="stmt"/>
-        <line num="57" count="6" type="stmt"/>
-        <line num="59" count="4" type="stmt"/>
-        <line num="61" count="0" type="stmt"/>
-        <line num="65" count="6" type="stmt"/>
-        <line num="66" count="0" type="stmt"/>
-        <line num="67" count="0" type="stmt"/>
-        <line num="69" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="70" count="0" type="stmt"/>
-        <line num="73" count="0" type="stmt"/>
-        <line num="76" count="6" type="stmt"/>
-        <line num="77" count="6" type="stmt"/>
-        <line num="78" count="6" type="stmt"/>
-        <line num="79" count="6" type="stmt"/>
-        <line num="80" count="6" type="stmt"/>
-        <line num="81" count="6" type="stmt"/>
-        <line num="83" count="6" type="stmt"/>
-        <line num="84" count="1" type="stmt"/>
-        <line num="86" count="6" type="stmt"/>
-        <line num="87" count="1" type="stmt"/>
-        <line num="89" count="6" type="stmt"/>
-        <line num="90" count="13" type="stmt"/>
-        <line num="104" count="13" type="stmt"/>
-        <line num="106" count="6" type="stmt"/>
-        <line num="109" count="1" type="stmt"/>
+        <line num="39" count="10" type="stmt"/>
+        <line num="40" count="20" type="cond" truecount="2" falsecount="0"/>
+        <line num="42" count="10" type="stmt"/>
+        <line num="43" count="10" type="cond" truecount="3" falsecount="0"/>
+        <line num="46" count="10" type="stmt"/>
+        <line num="51" count="10" type="stmt"/>
+        <line num="52" count="10" type="stmt"/>
+        <line num="53" count="10" type="stmt"/>
+        <line num="57" count="10" type="stmt"/>
+        <line num="59" count="10" type="stmt"/>
+        <line num="61" count="8" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="67" count="10" type="stmt"/>
+        <line num="68" count="4" type="stmt"/>
+        <line num="69" count="4" type="stmt"/>
+        <line num="71" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="72" count="0" type="stmt"/>
+        <line num="75" count="4" type="stmt"/>
+        <line num="78" count="10" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="81" count="10" type="stmt"/>
+        <line num="82" count="1" type="stmt"/>
+        <line num="84" count="10" type="stmt"/>
+        <line num="85" count="1" type="stmt"/>
+        <line num="87" count="10" type="stmt"/>
+        <line num="88" count="1" type="stmt"/>
+        <line num="90" count="10" type="stmt"/>
+        <line num="91" count="1" type="stmt"/>
+        <line num="93" count="10" type="stmt"/>
+        <line num="94" count="1" type="stmt"/>
+        <line num="96" count="10" type="stmt"/>
+        <line num="97" count="1" type="stmt"/>
+        <line num="99" count="10" type="stmt"/>
+        <line num="100" count="1" type="stmt"/>
+        <line num="102" count="10" type="stmt"/>
+        <line num="103" count="21" type="stmt"/>
+        <line num="118" count="21" type="stmt"/>
+        <line num="120" count="10" type="stmt"/>
+        <line num="123" count="1" type="stmt"/>
       </file>
-      <file name="setupTests.ts" path="/home/armando/perry-js/react-firebase-hoc/react-firebase-hoc/src/setupTests.ts">
+      <file name="setupTests.ts" path="/home/armando/Projects/react-with-firebase-auth/src/setupTests.ts">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>

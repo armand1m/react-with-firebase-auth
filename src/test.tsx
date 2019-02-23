@@ -3,7 +3,7 @@ import * as React from 'react';
 import * as firebase from 'firebase';
 import { shallow, mount } from 'enzyme';
 
-import firebaseConfig from './firebase-config';
+import firebaseConfig from '../fixtures/firebase-config';
 import withFirebaseAuth, { WrappedComponentProps } from './'
 
 const testApp = firebase.initializeApp(firebaseConfig);
@@ -11,12 +11,16 @@ const testAppAuth = testApp.auth();
 
 testAppAuth.signInWithEmailAndPassword = jest.fn();
 testAppAuth.createUserWithEmailAndPassword = jest.fn();
-// testAppAuth.signInWithGoogle = jest.fn();
-// testAppAuth.signInWithFacebook = jest.fn();
-// testAppAuth.signInWithGithub = jest.fn();
-// testAppAuth.signInWithTwitter = jest.fn();
 testAppAuth.signInAnonymously = jest.fn();
 testAppAuth.signOut = jest.fn();
+testAppAuth.signInWithPopup = jest.fn();
+
+const providers = {
+  googleProvider: new firebase.auth.GoogleAuthProvider(),
+  twitterProvider: new firebase.auth.TwitterAuthProvider(),
+  githubProvider: new firebase.auth.GithubAuthProvider(),
+  facebookProvider: new firebase.auth.FacebookAuthProvider(),
+};
 
 describe('withFirebaseAuth', () => {
   it('should be a function', () => {
@@ -29,6 +33,7 @@ describe('withFirebaseAuth', () => {
     const EnhancedComponent = withFirebaseAuth({
       firebaseAppAuth: testAppAuth,
     })(WrappedComponent);
+
     const wrapped = shallow(<EnhancedComponent />);
 
     expect(wrapped.find(WrappedComponent).exists()).toBeTruthy();
@@ -41,6 +46,7 @@ describe('withFirebaseAuth', () => {
     const EnhancedComponent = withFirebaseAuth({
       firebaseAppAuth: testAppAuth,
     })(WrappedComponent);
+
     const wrapped = mount(<EnhancedComponent />);
 
     wrapped.find('button').simulate('click');
@@ -55,6 +61,7 @@ describe('withFirebaseAuth', () => {
     const EnhancedComponent = withFirebaseAuth({
       firebaseAppAuth: testAppAuth,
     })(WrappedComponent);
+
     const wrapped = mount(<EnhancedComponent />);
 
     wrapped.find('button').simulate('click');
@@ -69,11 +76,76 @@ describe('withFirebaseAuth', () => {
     const EnhancedComponent = withFirebaseAuth({
       firebaseAppAuth: testAppAuth,
     })(WrappedComponent);
+
     const wrapped = mount(<EnhancedComponent />);
 
     wrapped.find('button').simulate('click');
 
     expect(testAppAuth.signInWithEmailAndPassword).toHaveBeenCalled();
+  });
+
+  it('should call signInWithPopup with googleProvider instance when signInWithGoogle prop is invoked', () => {
+    const WrappedComponent = ({ signInWithGoogle }: WrappedComponentProps) =>
+      <button onClick={() => signInWithGoogle()}>signInWithGoogle</button>;
+
+    const EnhancedComponent = withFirebaseAuth({
+      firebaseAppAuth: testAppAuth,
+      providers,
+    })(WrappedComponent);
+
+    const wrapped = mount(<EnhancedComponent />);
+
+    wrapped.find('button').simulate('click');
+
+    expect(testAppAuth.signInWithPopup).toHaveBeenCalledWith(providers.googleProvider);
+  });
+
+  it('should call signInWithPopup with twitterProvider instance when signInWithTwitter prop is invoked', () => {
+    const WrappedComponent = ({ signInWithTwitter }: WrappedComponentProps) =>
+      <button onClick={() => signInWithTwitter()}>signInWithTwitter</button>;
+
+    const EnhancedComponent = withFirebaseAuth({
+      firebaseAppAuth: testAppAuth,
+      providers,
+    })(WrappedComponent);
+
+    const wrapped = mount(<EnhancedComponent />);
+
+    wrapped.find('button').simulate('click');
+
+    expect(testAppAuth.signInWithPopup).toHaveBeenCalledWith(providers.twitterProvider);
+  });
+
+  it('should call signInWithPopup with facebookProvider instance when signInWithFacebook prop is invoked', () => {
+    const WrappedComponent = ({ signInWithFacebook }: WrappedComponentProps) =>
+      <button onClick={() => signInWithFacebook()}>signInWithFacebook</button>;
+
+    const EnhancedComponent = withFirebaseAuth({
+      firebaseAppAuth: testAppAuth,
+      providers,
+    })(WrappedComponent);
+
+    const wrapped = mount(<EnhancedComponent />);
+
+    wrapped.find('button').simulate('click');
+
+    expect(testAppAuth.signInWithPopup).toHaveBeenCalledWith(providers.facebookProvider);
+  });
+
+  it('should call signInWithPopup with githubProvider instance when signInWithGithub prop is invoked', () => {
+    const WrappedComponent = ({ signInWithGithub }: WrappedComponentProps) =>
+      <button onClick={() => signInWithGithub()}>signInWithGithub</button>;
+
+    const EnhancedComponent = withFirebaseAuth({
+      firebaseAppAuth: testAppAuth,
+      providers,
+    })(WrappedComponent);
+
+    const wrapped = mount(<EnhancedComponent />);
+
+    wrapped.find('button').simulate('click');
+
+    expect(testAppAuth.signInWithPopup).toHaveBeenCalledWith(providers.githubProvider);
   });
 
   it('should call createUserWithEmailAndPassword when prop is invoked', () => {
@@ -83,6 +155,7 @@ describe('withFirebaseAuth', () => {
     const EnhancedComponent = withFirebaseAuth({
       firebaseAppAuth: testAppAuth,
     })(WrappedComponent);
+
     const wrapped = mount(<EnhancedComponent />);
 
     wrapped.find('button').simulate('click');
@@ -101,6 +174,7 @@ describe('withFirebaseAuth', () => {
     const EnhancedComponent = withFirebaseAuth({
       firebaseAppAuth: testAppAuth,
     })(WrappedComponent);
+
     const wrapped = mount(<EnhancedComponent />);
 
     expect(wrapped.find('span').text()).toBe('');

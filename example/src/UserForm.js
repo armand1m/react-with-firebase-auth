@@ -1,5 +1,6 @@
 import React from 'react';
-import { compose, withState } from 'recompose';
+import compose from 'recompose/compose';
+import withState from 'recompose/withState';
 
 const Field = ({ children }) =>
   <React.Fragment>

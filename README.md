@@ -1,6 +1,7 @@
 # react-with-firebase-auth
 
 [![NPM](https://img.shields.io/npm/v/react-with-firebase-auth.svg)](https://www.npmjs.com/package/react-with-firebase-auth) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![Build Status](https://travis-ci.org/armand1m/react-with-firebase-auth.svg?branch=master)](https://travis-ci.org/armand1m/react-with-firebase-auth)
 
 > Higher Order Component for integrating Firebase with a React Component
 

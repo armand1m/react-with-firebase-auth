@@ -97,10 +97,14 @@ export default withFirebaseAuth({
 
 ## Examples
 
-There are a few examples available:
+There are a few source code examples available:
 
  - [armand1m/react-with-firebase-auth/tree/master/example](https://github.com/armand1m/react-with-firebase-auth/tree/master/example)
  - [armand1m/react-firebase-authentication-medium](https://github.com/armand1m/react-firebase-authentication-medium)
+
+You can also check a live demo example here:
+
+ - https://armand1m.github.io/react-with-firebase-auth/
 
 ## Articles
 

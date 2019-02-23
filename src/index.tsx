@@ -41,11 +41,12 @@ const withFirebaseAuth = ({
 }: HocParameters) =>
   (WrappedComponent: React.SFC<WrappedComponentProps>) => {
     return class FirebaseAuthProvider extends React.PureComponent {
-      static displayName = `withFirebaseAuth(${WrappedComponent.displayName || WrappedComponent.name})`
+      static displayName = `withFirebaseAuth(${WrappedComponent.displayName || WrappedComponent.name})`;
+
       state = {
         user: undefined,
         error: undefined,
-      }
+      };
 
       componentDidMount() {
         firebaseAppAuth.onAuthStateChanged((user: firebase.User) => {
@@ -74,12 +75,23 @@ const withFirebaseAuth = ({
           firebaseAppAuth.signInWithPopup(providerInstance);
         });
 
-      signOut = () => this.tryTo(() => firebaseAppAuth.signOut());
-      signInAnonymously = () => this.tryTo(() => firebaseAppAuth.signInAnonymously());
-      signInWithGithub = () => this.tryToSignInWithProvider('githubProvider');
-      signInWithTwitter = () => this.tryToSignInWithProvider('twitterProvider')
-      signInWithGoogle = () => this.tryToSignInWithProvider('googleProvider')
-      signInWithFacebook = () => this.tryToSignInWithProvider('facebookProvider')
+      signOut = () =>
+        this.tryTo(() => firebaseAppAuth.signOut());
+
+      signInAnonymously = () =>
+        this.tryTo(() => firebaseAppAuth.signInAnonymously());
+
+      signInWithGithub = () =>
+        this.tryToSignInWithProvider('githubProvider');
+
+      signInWithTwitter = () =>
+        this.tryToSignInWithProvider('twitterProvider');
+
+      signInWithGoogle = () =>
+        this.tryToSignInWithProvider('googleProvider');
+
+      signInWithFacebook = () =>
+        this.tryToSignInWithProvider('facebookProvider');
 
       signInWithEmailAndPassword = (email: string, password: string) =>
         this.tryTo(() => firebaseAppAuth.signInWithEmailAndPassword(email, password));

@@ -4,7 +4,7 @@ node_js:
   - 10
   - 11
 install:
-  - npm ci
+  - npm ci --build-from-source
 script:
   - npm test
   - codecov -f coverage/*.json

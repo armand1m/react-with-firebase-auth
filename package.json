@@ -1,6 +1,6 @@
 {
   "name": "react-with-firebase-auth",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "description": "Higher Order Component for integrating Firebase with a React Component",
   "author": "armand1m",
   "license": "MIT",
@@ -19,7 +19,8 @@
     "start": "rollup -c -w",
     "prepare": "npm run build",
     "predeploy": "cd example && npm install && npm run build",
-    "deploy": "gh-pages -d example/build"
+    "deploy": "gh-pages -d example/build",
+    "travis-deploy-once": "travis-deploy-once"
   },
   "peerDependencies": {
     "prop-types": "^15.5.4",
@@ -52,7 +53,9 @@
     "rollup-plugin-postcss-modules": "^1.0.8",
     "rollup-plugin-typescript2": "^0.13.0",
     "rollup-plugin-url": "^1.4.0",
-    "typescript": "^2.8.3"
+    "semantic-release": "^15.13.3",
+    "typescript": "^2.8.3",
+    "travis-deploy-once": "^5.0.11"
   },
   "files": [
     "dist"

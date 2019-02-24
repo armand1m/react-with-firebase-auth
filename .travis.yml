@@ -1,5 +1,8 @@
 language: node_js
 sudo: false
+cache:
+  directories:
+    - ~/.npm
 node_js:
   - 10
   - 11
@@ -8,3 +11,8 @@ install:
 script:
   - npm test
   - codecov -f coverage/*.json
+after_success:
+  - npm run travis-deploy-once "npx semantic-release"
+branches:
+  except:
+    - /^v\d+\.\d+\.\d+$/

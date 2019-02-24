@@ -31,16 +31,21 @@ export type ProvidersMapper = {
 };
 
 export type HocParameters = {
-  firebaseAppAuth: firebase.auth.Auth,
-  providers?: ProvidersMapper
+  firebaseAppAuth: firebase.auth.Auth;
+  providers?: ProvidersMapper;
+};
+
+export type FirebaseAuthProviderState = {
+  user?: firebase.User,
+  error?: string,
 };
 
 const withFirebaseAuth = ({
   firebaseAppAuth,
   providers = {},
 }: HocParameters) =>
-  (WrappedComponent: React.SFC<WrappedComponentProps>) => {
-    return class FirebaseAuthProvider extends React.PureComponent {
+  (WrappedComponent: React.SFC<WrappedComponentProps>) =>
+    class FirebaseAuthProvider extends React.PureComponent<{}, FirebaseAuthProviderState> {
       static displayName = `withFirebaseAuth(${WrappedComponent.displayName || WrappedComponent.name})`;
 
       state = {
@@ -48,21 +53,28 @@ const withFirebaseAuth = ({
         error: undefined,
       };
 
+      unsubscribeAuthStateListener: firebase.Unsubscribe;
+
       componentDidMount() {
-        firebaseAppAuth.onAuthStateChanged((user: firebase.User) => {
-          this.setState({ user });
-        });
+        this.unsubscribeAuthStateListener =
+          firebaseAppAuth.onAuthStateChanged((user: firebase.User) =>
+            this.setState({ user })
+          );
+      }
+
+      componentWillUnmount() {
+        this.unsubscribeAuthStateListener();
       }
 
       setError = (error: any) => this.setState({ error });
 
-      tryTo = async (operation: () => void) => {
+      tryTo = async (operation: () => any) => {
         try {
-          await operation();
+          return await operation();
         } catch(error) {
           this.setError(error.message);
         }
-      }
+      };
 
       tryToSignInWithProvider = (provider: PossibleProviders) =>
         this.tryTo(() => {
@@ -72,7 +84,7 @@ const withFirebaseAuth = ({
             throw new Error(getErrorMessageForProvider(provider));
           }
 
-          firebaseAppAuth.signInWithPopup(providerInstance);
+          return firebaseAppAuth.signInWithPopup(providerInstance);
         });
 
       signOut = () =>
@@ -99,18 +111,22 @@ const withFirebaseAuth = ({
       createUserWithEmailAndPassword = (email: string, password: string) =>
         this.tryTo(() => firebaseAppAuth.createUserWithEmailAndPassword(email, password));
 
+      sharedHandlers = {
+        signInWithEmailAndPassword: this.signInWithEmailAndPassword,
+        createUserWithEmailAndPassword: this.createUserWithEmailAndPassword,
+        signInWithGithub: this.signInWithGithub,
+        signInWithTwitter: this.signInWithTwitter,
+        signInWithGoogle: this.signInWithGoogle,
+        signInWithFacebook: this.signInWithFacebook,
+        setError: this.setError,
+        signInAnonymously: this.signInAnonymously,
+        signOut: this.signOut,
+      };
+
       render() {
         const props = {
           ...this.props,
-          signInWithEmailAndPassword: this.signInWithEmailAndPassword,
-          createUserWithEmailAndPassword: this.createUserWithEmailAndPassword,
-          signInWithGithub: this.signInWithGithub,
-          signInWithTwitter: this.signInWithTwitter,
-          signInWithGoogle: this.signInWithGoogle,
-          signInWithFacebook: this.signInWithFacebook,
-          setError: this.setError,
-          signInAnonymously: this.signInAnonymously,
-          signOut: this.signOut,
+          ...this.sharedHandlers,
           user: this.state.user,
           error: this.state.error,
         };
@@ -118,6 +134,5 @@ const withFirebaseAuth = ({
         return <WrappedComponent {...props} />;
       }
     }
-  };
 
 export default withFirebaseAuth;

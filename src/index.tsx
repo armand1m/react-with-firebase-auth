@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as firebase from 'firebase';
 
-import getErrorMessageForProvider from './get-error-message-for-provider';
+import getErrorMessageForProvider from './getErrorMessageForProvider';
 
 export type WrappedComponentProps = {
   signInWithEmailAndPassword: (email: string, password: string) => void;

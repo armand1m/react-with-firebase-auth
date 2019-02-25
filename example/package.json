@@ -9,8 +9,8 @@
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-scripts": "^2.1.5",
     "react-with-firebase-auth": "file:..",
-    "react-scripts": "^1.1.4",
     "recompose": "^0.30.0"
   },
   "scripts": {

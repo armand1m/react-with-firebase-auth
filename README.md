@@ -14,7 +14,6 @@ This library makes a `withFirebaseAuth()` function available to you.
  - [Articles](#articles)
  - [License](#license)
 
-
 ## Signature
 
 ```ts

@@ -18,8 +18,8 @@
     "build": "rollup -c",
     "start": "rollup -c -w",
     "prepare": "npm run build",
-    "predeploy": "cd example && npm install && npm run build",
-    "deploy": "gh-pages -d example/build",
+    "predeploy-example": "cd example && npm install && npm run build",
+    "deploy-example": "gh-pages -d example/build",
     "travis-deploy-once": "travis-deploy-once"
   },
   "peerDependencies": {
@@ -35,8 +35,8 @@
     "@types/jest": "^23.1.5",
     "@types/react": "^16.3.13",
     "@types/react-dom": "^16.0.5",
-    "babel-core": "^6.26.3",
-    "babel-runtime": "^6.26.0",
+    "@babel/core": "^7.0.0",
+    "@babel/runtime": "^7.0.0",
     "codecov": "^3.2.0",
     "cross-env": "^5.1.4",
     "enzyme": "^3.6.0",

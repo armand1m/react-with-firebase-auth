@@ -6,7 +6,7 @@
 [![bundlephobia](https://badgen.net/bundlephobia/min/react-with-firebase-auth)](https://bundlephobia.com/result?p=react-with-firebase-auth)
 [![bundlephobia](https://badgen.net/bundlephobia/minzip/react-with-firebase-auth)](https://bundlephobia.com/result?p=react-with-firebase-auth)
 [![devdependencies](https://badgen.net/david/dev/armand1m/react-with-firebase-auth)](https://david-dm.org/armand1m/react-with-firebase-auth?type=dev)
-[![peerdependencies](https://badgen.net/david/peer/armand1m/react-with-firebase-auth)](https://david-dm.org/armand1m/react-with-firebase-auth?type=peer)
+[![peerdependencies](https://badgen.net/david/peer/armand1m/react-with-firebase-auth)](https://david-dm.org/armand1m/react-with-firebase-auth?type=peer) [![Greenkeeper badge](https://badges.greenkeeper.io/armand1m/react-with-firebase-auth.svg)](https://greenkeeper.io/)
 
 > Higher Order Component for integrating Firebase with a React Component
 

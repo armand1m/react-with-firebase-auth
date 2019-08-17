@@ -91,6 +91,8 @@ const firebaseAppAuth = firebaseApp.auth();
 const providers = {
   googleProvider: new firebase.auth.GoogleAuthProvider(),
 };
+/** providers can be customised as per the Firebase documentation on auth providers **/
+providers.googleProvider.setCustomParameters({hd:"mycompany.com"});
 
 /** Wrap it */
 export default withFirebaseAuth({

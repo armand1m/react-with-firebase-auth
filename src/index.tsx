@@ -10,6 +10,7 @@ export type WrappedComponentProps = {
   signInWithFacebook: () => void;
   signInWithGithub: () => void;
   signInWithTwitter: () => void;
+  signInWithPhoneNumber:  (phoneNumber: string, applicationVerifier: firebase.auth.ApplicationVerifier) => Promise<any>;
   signInAnonymously: () => void;
   signOut: () => void;
   setError: (error: any) => void;
@@ -68,16 +69,17 @@ const withFirebaseAuth = ({
 
       setError = (error: any) => this.setState({ error });
 
-      tryTo = async (operation: () => any) => {
+      async tryTo <T> (operation: () => Promise<T>): Promise<T> {
         try {
-          return await operation();
+          return operation();
         } catch(error) {
           this.setError(error.message);
+          return error;
         }
       };
 
-      tryToSignInWithProvider = (provider: PossibleProviders) =>
-        this.tryTo(() => {
+      tryToSignInWithProvider = (provider: PossibleProviders): Promise<firebase.auth.UserCredential> =>
+        this.tryTo<firebase.auth.UserCredential>(() => {
           const providerInstance = providers[provider];
 
           if (!providerInstance) {
@@ -88,10 +90,10 @@ const withFirebaseAuth = ({
         });
 
       signOut = () =>
-        this.tryTo(() => firebaseAppAuth.signOut());
+        this.tryTo<void>(() => firebaseAppAuth.signOut());
 
       signInAnonymously = () =>
-        this.tryTo(() => firebaseAppAuth.signInAnonymously());
+        this.tryTo<firebase.auth.UserCredential>(() => firebaseAppAuth.signInAnonymously());
 
       signInWithGithub = () =>
         this.tryToSignInWithProvider('githubProvider');
@@ -106,10 +108,13 @@ const withFirebaseAuth = ({
         this.tryToSignInWithProvider('facebookProvider');
 
       signInWithEmailAndPassword = (email: string, password: string) =>
-        this.tryTo(() => firebaseAppAuth.signInWithEmailAndPassword(email, password));
+        this.tryTo<firebase.auth.UserCredential>(() => firebaseAppAuth.signInWithEmailAndPassword(email, password));
+
+      signInWithPhoneNumber = (phoneNumber: string, applicationVerifier: firebase.auth.ApplicationVerifier) =>
+        this.tryTo<firebase.auth.ConfirmationResult>(() => firebaseAppAuth.signInWithPhoneNumber(phoneNumber, applicationVerifier))
 
       createUserWithEmailAndPassword = (email: string, password: string) =>
-        this.tryTo(() => firebaseAppAuth.createUserWithEmailAndPassword(email, password));
+        this.tryTo<firebase.auth.UserCredential>(() => firebaseAppAuth.createUserWithEmailAndPassword(email, password));
 
       sharedHandlers = {
         signInWithEmailAndPassword: this.signInWithEmailAndPassword,
@@ -118,6 +123,7 @@ const withFirebaseAuth = ({
         signInWithTwitter: this.signInWithTwitter,
         signInWithGoogle: this.signInWithGoogle,
         signInWithFacebook: this.signInWithFacebook,
+        signInWithPhoneNumber: this.signInWithPhoneNumber,
         setError: this.setError,
         signInAnonymously: this.signInAnonymously,
         signOut: this.signOut,

@@ -19,7 +19,7 @@ const fakeUser = {
 };
 
 describe('withFirebaseAuth', () => {
-  let currentAuthStateObserver = (_user: firebase.User) => {};
+  let currentAuthStateObserver: any = (_user: firebase.User) => {};
   let unsubcribeAuthStateChangeMock = jest.fn();
 
   beforeEach(() => {
@@ -30,6 +30,7 @@ describe('withFirebaseAuth', () => {
     testAppAuth.signInAnonymously = jest.fn();
     testAppAuth.signOut = jest.fn();
     testAppAuth.signInWithPopup = jest.fn();
+    testAppAuth.signInWithPhoneNumber = jest.fn();
     testAppAuth.onAuthStateChanged = jest.fn(observer => {
       currentAuthStateObserver = observer;
       return unsubcribeAuthStateChangeMock;
@@ -204,8 +205,11 @@ describe('withFirebaseAuth', () => {
   });
 
   it('should call createUserWithEmailAndPassword when prop is invoked', () => {
+    const email = 'test';
+    const password = 'test';
+
     const WrappedComponent = ({ createUserWithEmailAndPassword }: WrappedComponentProps) =>
-      <button onClick={() => createUserWithEmailAndPassword('test', 'test')}>createUserWithEmailAndPassword</button>;
+      <button onClick={() => createUserWithEmailAndPassword(email, password)}>createUserWithEmailAndPassword</button>;
 
     const EnhancedComponent = withFirebaseAuth({
       firebaseAppAuth: testAppAuth,
@@ -215,7 +219,27 @@ describe('withFirebaseAuth', () => {
 
     wrapped.find('button').simulate('click');
 
-    expect(testAppAuth.createUserWithEmailAndPassword).toHaveBeenCalled();
+    expect(testAppAuth.createUserWithEmailAndPassword).toHaveBeenCalledWith(email, password);
+  });
+
+  it('should call signInWithPhoneNumber when prop is invoked', () => {
+    const phoneNumber = "666999666";
+    const applicationVerifier = { type: '', verify: () => Promise.resolve('') };
+
+    const WrappedComponent = ({ signInWithPhoneNumber }: WrappedComponentProps) =>
+      <button onClick={() => signInWithPhoneNumber(phoneNumber, applicationVerifier)}>
+        signInWithPhoneNumber
+      </button>;
+
+    const EnhancedComponent = withFirebaseAuth({
+      firebaseAppAuth: testAppAuth,
+    })(WrappedComponent);
+
+    const wrapped = mount(<EnhancedComponent />);
+
+    wrapped.find('button').simulate('click');
+
+    expect(testAppAuth.signInWithPhoneNumber).toHaveBeenCalledWith(phoneNumber, applicationVerifier);
   });
 
   it('should set an error when setError is invoked', () => {

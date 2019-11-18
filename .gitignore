@@ -22,3 +22,5 @@ yarn-error.log*
 
 .rpt*
 coverage
+
+yarn.lock

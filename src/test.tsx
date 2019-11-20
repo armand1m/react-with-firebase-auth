@@ -3,7 +3,7 @@ import * as React from 'react';
 import * as firebase from 'firebase';
 import { shallow, mount } from 'enzyme';
 
-import withFirebaseAuth, { WrappedComponentProps } from './'
+import withFirebaseAuth, { WrappedComponentProps } from './';
 
 const testAppAuth: firebase.auth.Auth = {} as firebase.auth.Auth;
 
@@ -11,7 +11,7 @@ const providers = {
   googleProvider: {} as firebase.auth.GoogleAuthProvider_Instance,
   twitterProvider: {} as firebase.auth.TwitterAuthProvider_Instance,
   githubProvider: {} as firebase.auth.GithubAuthProvider_Instance,
-  facebookProvider: {} as firebase.auth.FacebookAuthProvider_Instance,
+  facebookProvider: {} as firebase.auth.FacebookAuthProvider_Instance
 };
 
 const fakeUser = {
@@ -35,7 +35,7 @@ describe('withFirebaseAuth', () => {
       currentAuthStateObserver = observer;
       return unsubcribeAuthStateChangeMock;
     });
-  })
+  });
 
   it('should be a function', () => {
     expect(typeof withFirebaseAuth).toBe('function');
@@ -45,7 +45,7 @@ describe('withFirebaseAuth', () => {
     const WrappedComponent = () => <div>ama wrapped</div>;
 
     const EnhancedComponent = withFirebaseAuth({
-      firebaseAppAuth: testAppAuth,
+      firebaseAppAuth: testAppAuth
     })(WrappedComponent);
 
     const wrapped = shallow(<EnhancedComponent />);
@@ -57,7 +57,7 @@ describe('withFirebaseAuth', () => {
     const WrappedComponent = () => <div>ama wrapped</div>;
 
     const EnhancedComponent = withFirebaseAuth({
-      firebaseAppAuth: testAppAuth,
+      firebaseAppAuth: testAppAuth
     })(WrappedComponent);
 
     mount(<EnhancedComponent />);
@@ -69,7 +69,7 @@ describe('withFirebaseAuth', () => {
     const WrappedComponent = () => <div>ama wrapped</div>;
 
     const EnhancedComponent = withFirebaseAuth({
-      firebaseAppAuth: testAppAuth,
+      firebaseAppAuth: testAppAuth
     })(WrappedComponent);
 
     const wrapped = mount(<EnhancedComponent />);
@@ -83,7 +83,7 @@ describe('withFirebaseAuth', () => {
     const WrappedComponent = () => <div>ama wrapped</div>;
 
     const EnhancedComponent = withFirebaseAuth({
-      firebaseAppAuth: testAppAuth,
+      firebaseAppAuth: testAppAuth
     })(WrappedComponent);
 
     const wrapped = mount(<EnhancedComponent />);
@@ -93,14 +93,15 @@ describe('withFirebaseAuth', () => {
     currentAuthStateObserver(fakeUser as firebase.User);
 
     expect(wrapped.state('user')).toBe(fakeUser);
-  })
+  });
 
   it('should call signInAnonymously when prop is invoked', () => {
-    const WrappedComponent = ({ signInAnonymously }: WrappedComponentProps) =>
-      <button onClick={signInAnonymously}>signInAnonymously</button>;
+    const WrappedComponent = ({ signInAnonymously }: WrappedComponentProps) => (
+      <button onClick={signInAnonymously}>signInAnonymously</button>
+    );
 
     const EnhancedComponent = withFirebaseAuth({
-      firebaseAppAuth: testAppAuth,
+      firebaseAppAuth: testAppAuth
     })(WrappedComponent);
 
     const wrapped = mount(<EnhancedComponent />);
@@ -111,11 +112,12 @@ describe('withFirebaseAuth', () => {
   });
 
   it('should call signOut when prop is invoked', () => {
-    const WrappedComponent = ({ signOut }: WrappedComponentProps) =>
-      <button onClick={signOut}>signOut</button>;
+    const WrappedComponent = ({ signOut }: WrappedComponentProps) => (
+      <button onClick={signOut}>signOut</button>
+    );
 
     const EnhancedComponent = withFirebaseAuth({
-      firebaseAppAuth: testAppAuth,
+      firebaseAppAuth: testAppAuth
     })(WrappedComponent);
 
     const wrapped = mount(<EnhancedComponent />);
@@ -126,11 +128,16 @@ describe('withFirebaseAuth', () => {
   });
 
   it('should call signInWithEmailAndPassword when prop is invoked', () => {
-    const WrappedComponent = ({ signInWithEmailAndPassword }: WrappedComponentProps) =>
-      <button onClick={() => signInWithEmailAndPassword('test', 'test')}>signInWithEmailAndPassword</button>;
+    const WrappedComponent = ({
+      signInWithEmailAndPassword
+    }: WrappedComponentProps) => (
+      <button onClick={() => signInWithEmailAndPassword('test', 'test')}>
+        signInWithEmailAndPassword
+      </button>
+    );
 
     const EnhancedComponent = withFirebaseAuth({
-      firebaseAppAuth: testAppAuth,
+      firebaseAppAuth: testAppAuth
     })(WrappedComponent);
 
     const wrapped = mount(<EnhancedComponent />);
@@ -141,105 +148,135 @@ describe('withFirebaseAuth', () => {
   });
 
   it('should call signInWithPopup with googleProvider instance when signInWithGoogle prop is invoked', () => {
-    const WrappedComponent = ({ signInWithGoogle }: WrappedComponentProps) =>
-      <button onClick={() => signInWithGoogle()}>signInWithGoogle</button>;
+    const WrappedComponent = ({ signInWithGoogle }: WrappedComponentProps) => (
+      <button onClick={() => signInWithGoogle()}>signInWithGoogle</button>
+    );
 
     const EnhancedComponent = withFirebaseAuth({
       firebaseAppAuth: testAppAuth,
-      providers,
+      providers
     })(WrappedComponent);
 
     const wrapped = mount(<EnhancedComponent />);
 
     wrapped.find('button').simulate('click');
 
-    expect(testAppAuth.signInWithPopup).toHaveBeenCalledWith(providers.googleProvider);
+    expect(testAppAuth.signInWithPopup).toHaveBeenCalledWith(
+      providers.googleProvider
+    );
   });
 
   it('should call signInWithPopup with twitterProvider instance when signInWithTwitter prop is invoked', () => {
-    const WrappedComponent = ({ signInWithTwitter }: WrappedComponentProps) =>
-      <button onClick={() => signInWithTwitter()}>signInWithTwitter</button>;
+    const WrappedComponent = ({ signInWithTwitter }: WrappedComponentProps) => (
+      <button onClick={() => signInWithTwitter()}>signInWithTwitter</button>
+    );
 
     const EnhancedComponent = withFirebaseAuth({
       firebaseAppAuth: testAppAuth,
-      providers,
+      providers
     })(WrappedComponent);
 
     const wrapped = mount(<EnhancedComponent />);
 
     wrapped.find('button').simulate('click');
 
-    expect(testAppAuth.signInWithPopup).toHaveBeenCalledWith(providers.twitterProvider);
+    expect(testAppAuth.signInWithPopup).toHaveBeenCalledWith(
+      providers.twitterProvider
+    );
   });
 
   it('should call signInWithPopup with facebookProvider instance when signInWithFacebook prop is invoked', () => {
-    const WrappedComponent = ({ signInWithFacebook }: WrappedComponentProps) =>
-      <button onClick={() => signInWithFacebook()}>signInWithFacebook</button>;
+    const WrappedComponent = ({
+      signInWithFacebook
+    }: WrappedComponentProps) => (
+      <button onClick={() => signInWithFacebook()}>signInWithFacebook</button>
+    );
 
     const EnhancedComponent = withFirebaseAuth({
       firebaseAppAuth: testAppAuth,
-      providers,
+      providers
     })(WrappedComponent);
 
     const wrapped = mount(<EnhancedComponent />);
 
     wrapped.find('button').simulate('click');
 
-    expect(testAppAuth.signInWithPopup).toHaveBeenCalledWith(providers.facebookProvider);
+    expect(testAppAuth.signInWithPopup).toHaveBeenCalledWith(
+      providers.facebookProvider
+    );
   });
 
   it('should call signInWithPopup with githubProvider instance when signInWithGithub prop is invoked', () => {
-    const WrappedComponent = ({ signInWithGithub }: WrappedComponentProps) =>
-      <button onClick={() => signInWithGithub()}>signInWithGithub</button>;
+    const WrappedComponent = ({ signInWithGithub }: WrappedComponentProps) => (
+      <button onClick={() => signInWithGithub()}>signInWithGithub</button>
+    );
 
     const EnhancedComponent = withFirebaseAuth({
       firebaseAppAuth: testAppAuth,
-      providers,
+      providers
     })(WrappedComponent);
 
     const wrapped = mount(<EnhancedComponent />);
 
     wrapped.find('button').simulate('click');
 
-    expect(testAppAuth.signInWithPopup).toHaveBeenCalledWith(providers.githubProvider);
+    expect(testAppAuth.signInWithPopup).toHaveBeenCalledWith(
+      providers.githubProvider
+    );
   });
 
   it('should call createUserWithEmailAndPassword when prop is invoked', () => {
     const email = 'test';
     const password = 'test';
 
-    const WrappedComponent = ({ createUserWithEmailAndPassword }: WrappedComponentProps) =>
-      <button onClick={() => createUserWithEmailAndPassword(email, password)}>createUserWithEmailAndPassword</button>;
+    const WrappedComponent = ({
+      createUserWithEmailAndPassword
+    }: WrappedComponentProps) => (
+      <button onClick={() => createUserWithEmailAndPassword(email, password)}>
+        createUserWithEmailAndPassword
+      </button>
+    );
 
     const EnhancedComponent = withFirebaseAuth({
-      firebaseAppAuth: testAppAuth,
+      firebaseAppAuth: testAppAuth
     })(WrappedComponent);
 
     const wrapped = mount(<EnhancedComponent />);
 
     wrapped.find('button').simulate('click');
 
-    expect(testAppAuth.createUserWithEmailAndPassword).toHaveBeenCalledWith(email, password);
+    expect(testAppAuth.createUserWithEmailAndPassword).toHaveBeenCalledWith(
+      email,
+      password
+    );
   });
 
   it('should call signInWithPhoneNumber when prop is invoked', () => {
-    const phoneNumber = "666999666";
+    const phoneNumber = '666999666';
     const applicationVerifier = { type: '', verify: () => Promise.resolve('') };
 
-    const WrappedComponent = ({ signInWithPhoneNumber }: WrappedComponentProps) =>
-      <button onClick={() => signInWithPhoneNumber(phoneNumber, applicationVerifier)}>
+    const WrappedComponent = ({
+      signInWithPhoneNumber
+    }: WrappedComponentProps) => (
+      <button
+        onClick={() => signInWithPhoneNumber(phoneNumber, applicationVerifier)}
+      >
         signInWithPhoneNumber
-      </button>;
+      </button>
+    );
 
     const EnhancedComponent = withFirebaseAuth({
-      firebaseAppAuth: testAppAuth,
+      firebaseAppAuth: testAppAuth
     })(WrappedComponent);
 
     const wrapped = mount(<EnhancedComponent />);
 
     wrapped.find('button').simulate('click');
 
-    expect(testAppAuth.signInWithPhoneNumber).toHaveBeenCalledWith(phoneNumber, applicationVerifier);
+    expect(testAppAuth.signInWithPhoneNumber).toHaveBeenCalledWith(
+      phoneNumber,
+      applicationVerifier
+    );
   });
 
   it('should set an error when setError is invoked', () => {
@@ -251,7 +288,7 @@ describe('withFirebaseAuth', () => {
     );
 
     const EnhancedComponent = withFirebaseAuth({
-      firebaseAppAuth: testAppAuth,
+      firebaseAppAuth: testAppAuth
     })(WrappedComponent);
 
     const wrapped = mount(<EnhancedComponent />);
@@ -262,17 +299,20 @@ describe('withFirebaseAuth', () => {
   });
 
   it('should set an error when trying to call a login provider without providing its instance', () => {
-    const WrappedComponent = ({ signInWithGithub }: WrappedComponentProps) =>
-      <button onClick={() => signInWithGithub()}>signInWithGithub</button>;
+    const WrappedComponent = ({ signInWithGithub }: WrappedComponentProps) => (
+      <button onClick={() => signInWithGithub()}>signInWithGithub</button>
+    );
 
     const EnhancedComponent = withFirebaseAuth({
-      firebaseAppAuth: testAppAuth,
+      firebaseAppAuth: testAppAuth
     })(WrappedComponent);
 
     const wrapped = mount(<EnhancedComponent />);
 
     wrapped.find('button').simulate('click');
 
-    expect(wrapped.state('error')).toContain('Please provide an instance of firebase.auth.GithubAuthProvider')
+    expect(wrapped.state('error')).toContain(
+      'Please provide an instance of firebase.auth.GithubAuthProvider'
+    );
   });
 });

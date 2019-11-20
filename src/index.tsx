@@ -1,7 +1,7 @@
-import * as React from "react";
-import * as firebase from "firebase";
+import * as React from 'react';
+import * as firebase from 'firebase';
 
-import getErrorMessageForProvider from "./getErrorMessageForProvider";
+import getErrorMessageForProvider from './getErrorMessageForProvider';
 
 export type WrappedComponentProps = {
   signInWithEmailAndPassword: (email: string, password: string) => void;
@@ -23,10 +23,10 @@ export type WrappedComponentProps = {
 };
 
 export type PossibleProviders =
-  | "googleProvider"
-  | "facebookProvider"
-  | "twitterProvider"
-  | "githubProvider";
+  | 'googleProvider'
+  | 'facebookProvider'
+  | 'twitterProvider'
+  | 'githubProvider';
 
 export type ProvidersMapper = {
   googleProvider?: firebase.auth.GithubAuthProvider_Instance;
@@ -116,13 +116,13 @@ const withFirebaseAuth = ({
         firebaseAppAuth.signInAnonymously()
       );
 
-    signInWithGithub = () => this.tryToSignInWithProvider("githubProvider");
+    signInWithGithub = () => this.tryToSignInWithProvider('githubProvider');
 
-    signInWithTwitter = () => this.tryToSignInWithProvider("twitterProvider");
+    signInWithTwitter = () => this.tryToSignInWithProvider('twitterProvider');
 
-    signInWithGoogle = () => this.tryToSignInWithProvider("googleProvider");
+    signInWithGoogle = () => this.tryToSignInWithProvider('googleProvider');
 
-    signInWithFacebook = () => this.tryToSignInWithProvider("facebookProvider");
+    signInWithFacebook = () => this.tryToSignInWithProvider('facebookProvider');
 
     signInWithEmailAndPassword = (email: string, password: string) =>
       this.tryTo<firebase.auth.UserCredential>(() =>

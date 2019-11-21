@@ -17,31 +17,34 @@
     "test:watch": "react-scripts-ts test --env=jsdom",
     "build": "rollup -c",
     "start": "rollup -c -w",
+    "lint": "prettier --check 'src/**/*.{ts,tsx}'",
+    "lint:fix": "prettier --write 'src/**/*.{ts,tsx}'",
     "prepare": "npm run build",
     "predeploy-example": "cd example && npm install && npm run build",
     "deploy-example": "gh-pages -d example/build",
     "travis-deploy-once": "travis-deploy-once"
   },
   "peerDependencies": {
+    "firebase": "^7.0.0",
     "prop-types": "^15.5.4",
     "react": "^15.0.0 || ^16.0.0",
-    "react-dom": "^15.0.0 || ^16.0.0",
-    "firebase": "^7.0.0"
+    "react-dom": "^15.0.0 || ^16.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/runtime": "^7.0.0",
     "@types/enzyme": "^3.1.14",
     "@types/enzyme-adapter-react-16": "^1.0.3",
     "@types/firebase": "^3.2.1",
     "@types/jest": "^24.0.6",
     "@types/react": "^16.3.13",
     "@types/react-dom": "^16.0.5",
-    "@babel/core": "^7.0.0",
-    "@babel/runtime": "^7.0.0",
     "codecov": "^3.2.0",
     "cross-env": "^6.0.0",
     "enzyme": "^3.6.0",
     "enzyme-adapter-react-16": "^1.5.0",
     "gh-pages": "^2.0.1",
+    "prettier": "^1.19.1",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts-ts": "^3.1.0",
@@ -54,8 +57,8 @@
     "rollup-plugin-typescript2": "^0.24.0",
     "rollup-plugin-url": "^2.2.0",
     "semantic-release": "^15.13.3",
-    "typescript": "^3.3.3333",
-    "travis-deploy-once": "^5.0.11"
+    "travis-deploy-once": "^5.0.11",
+    "typescript": "^3.3.3333"
   },
   "files": [
     "dist"

@@ -69,6 +69,7 @@ const App = ({
   setError,
   user,
   error,
+  loading,
 }: WrappedComponentProps) => (
   <React.Fragment>
     {
@@ -81,6 +82,10 @@ const App = ({
       user
         ? <button onClick={signOut}>Sign out</button>
         : <button onClick={signInWithGoogle}>Sign in with Google</button>
+    }
+
+    {
+      loading && <h2>Loading..</h2>
     }
   </React.Fragment>
 );

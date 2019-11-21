@@ -11,11 +11,11 @@ const providers = {
   googleProvider: {} as firebase.auth.GoogleAuthProvider_Instance,
   twitterProvider: {} as firebase.auth.TwitterAuthProvider_Instance,
   githubProvider: {} as firebase.auth.GithubAuthProvider_Instance,
-  facebookProvider: {} as firebase.auth.FacebookAuthProvider_Instance
+  facebookProvider: {} as firebase.auth.FacebookAuthProvider_Instance,
 };
 
 const fakeUser = {
-  displayName: 'fake'
+  displayName: 'fake',
 };
 
 describe('withFirebaseAuth', () => {
@@ -45,7 +45,7 @@ describe('withFirebaseAuth', () => {
     const WrappedComponent = () => <div>ama wrapped</div>;
 
     const EnhancedComponent = withFirebaseAuth({
-      firebaseAppAuth: testAppAuth
+      firebaseAppAuth: testAppAuth,
     })(WrappedComponent);
 
     const wrapped = shallow(<EnhancedComponent />);
@@ -57,7 +57,7 @@ describe('withFirebaseAuth', () => {
     const WrappedComponent = () => <div>ama wrapped</div>;
 
     const EnhancedComponent = withFirebaseAuth({
-      firebaseAppAuth: testAppAuth
+      firebaseAppAuth: testAppAuth,
     })(WrappedComponent);
 
     mount(<EnhancedComponent />);
@@ -69,7 +69,7 @@ describe('withFirebaseAuth', () => {
     const WrappedComponent = () => <div>ama wrapped</div>;
 
     const EnhancedComponent = withFirebaseAuth({
-      firebaseAppAuth: testAppAuth
+      firebaseAppAuth: testAppAuth,
     })(WrappedComponent);
 
     const wrapped = mount(<EnhancedComponent />);
@@ -83,7 +83,7 @@ describe('withFirebaseAuth', () => {
     const WrappedComponent = () => <div>ama wrapped</div>;
 
     const EnhancedComponent = withFirebaseAuth({
-      firebaseAppAuth: testAppAuth
+      firebaseAppAuth: testAppAuth,
     })(WrappedComponent);
 
     const wrapped = mount(<EnhancedComponent />);
@@ -101,7 +101,7 @@ describe('withFirebaseAuth', () => {
     );
 
     const EnhancedComponent = withFirebaseAuth({
-      firebaseAppAuth: testAppAuth
+      firebaseAppAuth: testAppAuth,
     })(WrappedComponent);
 
     const wrapped = mount(<EnhancedComponent />);
@@ -117,7 +117,7 @@ describe('withFirebaseAuth', () => {
     );
 
     const EnhancedComponent = withFirebaseAuth({
-      firebaseAppAuth: testAppAuth
+      firebaseAppAuth: testAppAuth,
     })(WrappedComponent);
 
     const wrapped = mount(<EnhancedComponent />);
@@ -129,7 +129,7 @@ describe('withFirebaseAuth', () => {
 
   it('should call signInWithEmailAndPassword when prop is invoked', () => {
     const WrappedComponent = ({
-      signInWithEmailAndPassword
+      signInWithEmailAndPassword,
     }: WrappedComponentProps) => (
       <button onClick={() => signInWithEmailAndPassword('test', 'test')}>
         signInWithEmailAndPassword
@@ -137,7 +137,7 @@ describe('withFirebaseAuth', () => {
     );
 
     const EnhancedComponent = withFirebaseAuth({
-      firebaseAppAuth: testAppAuth
+      firebaseAppAuth: testAppAuth,
     })(WrappedComponent);
 
     const wrapped = mount(<EnhancedComponent />);
@@ -154,7 +154,7 @@ describe('withFirebaseAuth', () => {
 
     const EnhancedComponent = withFirebaseAuth({
       firebaseAppAuth: testAppAuth,
-      providers
+      providers,
     })(WrappedComponent);
 
     const wrapped = mount(<EnhancedComponent />);
@@ -162,7 +162,7 @@ describe('withFirebaseAuth', () => {
     wrapped.find('button').simulate('click');
 
     expect(testAppAuth.signInWithPopup).toHaveBeenCalledWith(
-      providers.googleProvider
+      providers.googleProvider,
     );
   });
 
@@ -173,7 +173,7 @@ describe('withFirebaseAuth', () => {
 
     const EnhancedComponent = withFirebaseAuth({
       firebaseAppAuth: testAppAuth,
-      providers
+      providers,
     })(WrappedComponent);
 
     const wrapped = mount(<EnhancedComponent />);
@@ -181,20 +181,20 @@ describe('withFirebaseAuth', () => {
     wrapped.find('button').simulate('click');
 
     expect(testAppAuth.signInWithPopup).toHaveBeenCalledWith(
-      providers.twitterProvider
+      providers.twitterProvider,
     );
   });
 
   it('should call signInWithPopup with facebookProvider instance when signInWithFacebook prop is invoked', () => {
     const WrappedComponent = ({
-      signInWithFacebook
+      signInWithFacebook,
     }: WrappedComponentProps) => (
       <button onClick={() => signInWithFacebook()}>signInWithFacebook</button>
     );
 
     const EnhancedComponent = withFirebaseAuth({
       firebaseAppAuth: testAppAuth,
-      providers
+      providers,
     })(WrappedComponent);
 
     const wrapped = mount(<EnhancedComponent />);
@@ -202,7 +202,7 @@ describe('withFirebaseAuth', () => {
     wrapped.find('button').simulate('click');
 
     expect(testAppAuth.signInWithPopup).toHaveBeenCalledWith(
-      providers.facebookProvider
+      providers.facebookProvider,
     );
   });
 
@@ -213,7 +213,7 @@ describe('withFirebaseAuth', () => {
 
     const EnhancedComponent = withFirebaseAuth({
       firebaseAppAuth: testAppAuth,
-      providers
+      providers,
     })(WrappedComponent);
 
     const wrapped = mount(<EnhancedComponent />);
@@ -221,7 +221,7 @@ describe('withFirebaseAuth', () => {
     wrapped.find('button').simulate('click');
 
     expect(testAppAuth.signInWithPopup).toHaveBeenCalledWith(
-      providers.githubProvider
+      providers.githubProvider,
     );
   });
 
@@ -230,7 +230,7 @@ describe('withFirebaseAuth', () => {
     const password = 'test';
 
     const WrappedComponent = ({
-      createUserWithEmailAndPassword
+      createUserWithEmailAndPassword,
     }: WrappedComponentProps) => (
       <button onClick={() => createUserWithEmailAndPassword(email, password)}>
         createUserWithEmailAndPassword
@@ -238,7 +238,7 @@ describe('withFirebaseAuth', () => {
     );
 
     const EnhancedComponent = withFirebaseAuth({
-      firebaseAppAuth: testAppAuth
+      firebaseAppAuth: testAppAuth,
     })(WrappedComponent);
 
     const wrapped = mount(<EnhancedComponent />);
@@ -247,7 +247,7 @@ describe('withFirebaseAuth', () => {
 
     expect(testAppAuth.createUserWithEmailAndPassword).toHaveBeenCalledWith(
       email,
-      password
+      password,
     );
   });
 
@@ -256,7 +256,7 @@ describe('withFirebaseAuth', () => {
     const applicationVerifier = { type: '', verify: () => Promise.resolve('') };
 
     const WrappedComponent = ({
-      signInWithPhoneNumber
+      signInWithPhoneNumber,
     }: WrappedComponentProps) => (
       <button
         onClick={() => signInWithPhoneNumber(phoneNumber, applicationVerifier)}
@@ -266,7 +266,7 @@ describe('withFirebaseAuth', () => {
     );
 
     const EnhancedComponent = withFirebaseAuth({
-      firebaseAppAuth: testAppAuth
+      firebaseAppAuth: testAppAuth,
     })(WrappedComponent);
 
     const wrapped = mount(<EnhancedComponent />);
@@ -275,7 +275,7 @@ describe('withFirebaseAuth', () => {
 
     expect(testAppAuth.signInWithPhoneNumber).toHaveBeenCalledWith(
       phoneNumber,
-      applicationVerifier
+      applicationVerifier,
     );
   });
 
@@ -288,7 +288,7 @@ describe('withFirebaseAuth', () => {
     );
 
     const EnhancedComponent = withFirebaseAuth({
-      firebaseAppAuth: testAppAuth
+      firebaseAppAuth: testAppAuth,
     })(WrappedComponent);
 
     const wrapped = mount(<EnhancedComponent />);
@@ -304,7 +304,7 @@ describe('withFirebaseAuth', () => {
     );
 
     const EnhancedComponent = withFirebaseAuth({
-      firebaseAppAuth: testAppAuth
+      firebaseAppAuth: testAppAuth,
     })(WrappedComponent);
 
     const wrapped = mount(<EnhancedComponent />);
@@ -312,7 +312,7 @@ describe('withFirebaseAuth', () => {
     wrapped.find('button').simulate('click');
 
     expect(wrapped.state('error')).toContain(
-      'Please provide an instance of firebase.auth.GithubAuthProvider'
+      'Please provide an instance of firebase.auth.GithubAuthProvider',
     );
   });
 });

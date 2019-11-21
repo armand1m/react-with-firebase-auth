@@ -12,7 +12,7 @@ export type WrappedComponentProps = {
   signInWithTwitter: () => void;
   signInWithPhoneNumber: (
     phoneNumber: string,
-    applicationVerifier: firebase.auth.ApplicationVerifier
+    applicationVerifier: firebase.auth.ApplicationVerifier,
   ) => Promise<any>;
   signInAnonymously: () => void;
   signOut: () => void;
@@ -48,7 +48,7 @@ export type FirebaseAuthProviderState = {
 
 const withFirebaseAuth = ({
   firebaseAppAuth,
-  providers = {}
+  providers = {},
 }: HocParameters) => (WrappedComponent: React.SFC<WrappedComponentProps>) =>
   class FirebaseAuthProvider extends React.PureComponent<
     {},
@@ -60,19 +60,18 @@ const withFirebaseAuth = ({
     state = {
       loading: false,
       user: undefined,
-      error: undefined
+      error: undefined,
     };
 
     unsubscribeAuthStateListener: firebase.Unsubscribe;
 
     componentDidMount() {
-      this.setState({ loading: true });
+      this.toggleLoading();
 
       this.unsubscribeAuthStateListener = firebaseAppAuth.onAuthStateChanged(
-        (user: firebase.User) => this.setState({ user, loading: false }),
-        (error: firebase.auth.Error) =>
-          this.setState({ error: error.message, loading: false }),
-        () => this.setState({ loading: false })
+        (user: firebase.User) => this.setState({ user }),
+        (error: firebase.auth.Error) => this.setError(error.message),
+        () => this.toggleLoading(),
       );
     }
 
@@ -82,23 +81,22 @@ const withFirebaseAuth = ({
 
     setError = (error: any) => this.setState({ error });
 
-    async tryTo<T>(operation: () => Promise<T>): Promise<T> {
+    toggleLoading = () =>
+      this.setState(currState => ({ loading: !currState.loading }));
+
+    async tryTo<T>(operation: () => Promise<T>) {
       try {
-        const callback = await operation();
-
-        this.setState({ loading: false });
-
-        return callback;
+        const result = await operation();
+        this.toggleLoading();
+        return result;
       } catch (error) {
-        this.setState({ error: error.message, loading: false });
-
-        return error;
+        this.setError(error.message);
+        this.toggleLoading();
+        return error as Error;
       }
     }
 
-    tryToSignInWithProvider = (
-      provider: PossibleProviders
-    ): Promise<firebase.auth.UserCredential> =>
+    tryToSignInWithProvider = (provider: PossibleProviders) =>
       this.tryTo<firebase.auth.UserCredential>(() => {
         const providerInstance = providers[provider];
 
@@ -113,7 +111,7 @@ const withFirebaseAuth = ({
 
     signInAnonymously = () =>
       this.tryTo<firebase.auth.UserCredential>(() =>
-        firebaseAppAuth.signInAnonymously()
+        firebaseAppAuth.signInAnonymously(),
       );
 
     signInWithGithub = () => this.tryToSignInWithProvider('githubProvider');
@@ -126,20 +124,20 @@ const withFirebaseAuth = ({
 
     signInWithEmailAndPassword = (email: string, password: string) =>
       this.tryTo<firebase.auth.UserCredential>(() =>
-        firebaseAppAuth.signInWithEmailAndPassword(email, password)
+        firebaseAppAuth.signInWithEmailAndPassword(email, password),
       );
 
     signInWithPhoneNumber = (
       phoneNumber: string,
-      applicationVerifier: firebase.auth.ApplicationVerifier
+      applicationVerifier: firebase.auth.ApplicationVerifier,
     ) =>
       this.tryTo<firebase.auth.ConfirmationResult>(() =>
-        firebaseAppAuth.signInWithPhoneNumber(phoneNumber, applicationVerifier)
+        firebaseAppAuth.signInWithPhoneNumber(phoneNumber, applicationVerifier),
       );
 
     createUserWithEmailAndPassword = (email: string, password: string) =>
       this.tryTo<firebase.auth.UserCredential>(() =>
-        firebaseAppAuth.createUserWithEmailAndPassword(email, password)
+        firebaseAppAuth.createUserWithEmailAndPassword(email, password),
       );
 
     sharedHandlers = {
@@ -152,7 +150,7 @@ const withFirebaseAuth = ({
       signInWithPhoneNumber: this.signInWithPhoneNumber,
       setError: this.setError,
       signInAnonymously: this.signInAnonymously,
-      signOut: this.signOut
+      signOut: this.signOut,
     };
 
     render() {
@@ -161,7 +159,7 @@ const withFirebaseAuth = ({
         ...this.sharedHandlers,
         loading: this.state.loading,
         user: this.state.user,
-        error: this.state.error
+        error: this.state.error,
       };
 
       return <WrappedComponent {...props} />;

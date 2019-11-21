@@ -17,6 +17,8 @@
     "test:watch": "react-scripts-ts test --env=jsdom",
     "build": "rollup -c",
     "start": "rollup -c -w",
+    "lint": "prettier --check 'src/**/*.{ts,tsx}'",
+    "lint:fix": "prettier --write 'src/**/*.{ts,tsx}'",
     "prepare": "npm run build",
     "predeploy-example": "cd example && npm install && npm run build",
     "deploy-example": "gh-pages -d example/build",

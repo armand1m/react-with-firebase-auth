@@ -121,6 +121,10 @@ You can also check a live demo example here:
 
  - ["How to setup Firebase Authentication with React in 5 minutes (maybe 10)"](https://medium.com/firebase-developers/how-to-setup-firebase-authentication-with-react-in-5-minutes-maybe-10-bb8bb53e8834)
 
+## Stargazers
+
+[![Stargazers over time](https://starchart.cc/armand1m/react-with-firebase-auth.svg)](https://starchart.cc/armand1m/react-with-firebase-auth)
+
 ## License
 
 MIT © [Armando Magalhaes](https://github.com/armand1m)

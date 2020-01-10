@@ -8,6 +8,19 @@
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
+  "keywords": [
+    "react",
+    "firebase",
+    "firebase-auth",
+    "authentication",
+    "higher-order-component",
+    "composable",
+    "hoc",
+    "google",
+    "facebook",
+    "twitter",
+    "email"
+  ],
   "engines": {
     "node": ">=8",
     "npm": ">=5"

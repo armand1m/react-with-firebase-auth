@@ -21,7 +21,7 @@ This library makes a `withFirebaseAuth()` function available to you.
 ## Signature
 
 ```ts
-type HocParameters = {
+type FirebaseAuthProps = {
   firebaseAppAuth: firebase.auth.Auth,
   providers?: {
     googleProvider?: firebase.auth.GoogleAuthProvider_Instance;
@@ -31,13 +31,37 @@ type HocParameters = {
   }
 };
 
-withFirebaseAuth(props: HocParameters): HigherOrderComponent
+withFirebaseAuth<P>(authProps: FirebaseAuthProps) =>
+  createComponentWithAuth(WrappedComponent: React.ComponentType<P>) =>
+    React.ComponentType
+```
+
+## Props Provided
+
+```ts
+type WrappedComponentProps = {
+  signInWithEmailAndPassword: (email: string, password: string) => void;
+  createUserWithEmailAndPassword: (email: string, password: string) => void;
+  signInWithGoogle: () => void;
+  signInWithFacebook: () => void;
+  signInWithGithub: () => void;
+  signInWithTwitter: () => void;
+  signInWithPhoneNumber: (
+    phoneNumber: string,
+    applicationVerifier: firebase.auth.ApplicationVerifier,
+  ) => void;
+  signInAnonymously: () => void;
+  signOut: () => void;
+  setError: (error: string) => void;
+  user?: firebase.User | null;
+  error?: string;
+  loading: boolean;
+};
 ```
 
 ## Usage
 
-Install it first using NPM:
-
+Install it:
 
 ```bash
 npm install --save react-with-firebase-auth
@@ -56,6 +80,24 @@ import firebaseConfig from './firebaseConfig';
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 
+const firebaseAppAuth = firebaseApp.auth();
+
+/** See the signature above to find out the available providers */
+const providers = {
+  googleProvider: new firebase.auth.GoogleAuthProvider(),
+};
+
+/** providers can be customised as per the Firebase documentation on auth providers **/
+providers.googleProvider.setCustomParameters({
+  hd: 'mycompany.com',
+});
+
+/** Create the FirebaseAuth component wrapper */
+const createComponentWithAuth = withFirebaseAuth({
+  providers,
+  firebaseAppAuth,
+});
+
 const App = ({
   /** These props are provided by withFirebaseAuth HOC */
   signInWithEmailAndPassword,
@@ -72,6 +114,9 @@ const App = ({
   loading,
 }: WrappedComponentProps) => (
   <React.Fragment>
+    {
+      loading && "Loading.."
+    }
     {
       user
         ? <h1>Hello, {user.displayName}</h1>
@@ -90,28 +135,16 @@ const App = ({
   </React.Fragment>
 );
 
-const firebaseAppAuth = firebaseApp.auth();
-
-/** See the signature above to find out the available providers */
-const providers = {
-  googleProvider: new firebase.auth.GoogleAuthProvider(),
-};
-/** providers can be customised as per the Firebase documentation on auth providers **/
-providers.googleProvider.setCustomParameters({hd:"mycompany.com"});
-
 /** Wrap it */
-export default withFirebaseAuth({
-  providers,
-  firebaseAppAuth,
-})(App);
+export default createComponentWithAuth(App);
 ```
 
 ## Examples
 
 There are a few source code examples available:
 
- - [armand1m/react-with-firebase-auth/tree/master/example](https://github.com/armand1m/react-with-firebase-auth/tree/master/example)
- - [armand1m/react-firebase-authentication-medium](https://github.com/armand1m/react-firebase-authentication-medium)
+ - Create React App Javascript Example: [armand1m/react-with-firebase-auth/tree/master/example](https://github.com/armand1m/react-with-firebase-auth/tree/master/example)
+ - Create React App Medium Example: [armand1m/react-firebase-authentication-medium](https://github.com/armand1m/react-firebase-authentication-medium)
 
 You can also check a live demo example here:
 

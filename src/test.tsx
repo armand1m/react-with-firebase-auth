@@ -1,11 +1,10 @@
-import 'jest';
-import * as React from 'react';
-import * as firebase from 'firebase';
+import React from 'react';
+import firebase from 'firebase';
 import { shallow, mount } from 'enzyme';
 
 import withFirebaseAuth, { WrappedComponentProps } from './';
 
-const testAppAuth: firebase.auth.Auth = {} as firebase.auth.Auth;
+const testAppAuth = {} as firebase.auth.Auth;
 
 const providers = {
   googleProvider: {} as firebase.auth.GoogleAuthProvider_Instance,
@@ -16,10 +15,16 @@ const providers = {
 
 const fakeUser = {
   displayName: 'fake',
-};
+} as firebase.User;
+
+type AuthStateObserver =
+  | firebase.Observer<any, Error>
+  | ((user: firebase.User | null) => any);
 
 describe('withFirebaseAuth', () => {
-  let currentAuthStateObserver: any = (_user: firebase.User) => {};
+  let currentAuthStateObserver: AuthStateObserver = (
+    _user: firebase.User,
+  ) => {};
   let unsubcribeAuthStateChangeMock = jest.fn();
 
   beforeEach(() => {
@@ -51,6 +56,20 @@ describe('withFirebaseAuth', () => {
     const wrapped = shallow(<EnhancedComponent />);
 
     expect(wrapped.find(WrappedComponent).exists()).toBeTruthy();
+  });
+
+  it('should start with loading as false', () => {
+    const WrappedComponent = ({ loading }: WrappedComponentProps) => (
+      <p>{String(loading)}</p>
+    );
+
+    const EnhancedComponent = withFirebaseAuth({
+      firebaseAppAuth: testAppAuth,
+    })(WrappedComponent);
+
+    const wrapped = mount(<EnhancedComponent />);
+
+    expect(wrapped.text()).toBe('false');
   });
 
   it('should setup onAuthStateChange listener when mounting the component', () => {
@@ -90,7 +109,9 @@ describe('withFirebaseAuth', () => {
 
     expect(wrapped.state('user')).toBeUndefined();
 
-    currentAuthStateObserver(fakeUser as firebase.User);
+    if (typeof currentAuthStateObserver === 'function') {
+      currentAuthStateObserver(fakeUser);
+    }
 
     expect(wrapped.state('user')).toBe(fakeUser);
   });

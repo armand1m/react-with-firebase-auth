@@ -1,6 +1,4 @@
-import React from 'react';
-import compose from 'recompose/compose';
-import withState from 'recompose/withState';
+import React, { useState } from 'react';
 
 const Field = ({ children }) =>
   <React.Fragment>
@@ -19,26 +17,22 @@ const SubmitButton = props =>
   <button {...props}>submit</button>;
 
 const UserForm = ({
-  setEmail,
-  setPassword,
-  email,
-  password,
   onSubmit,
-}) => (
-  <React.Fragment>
-    <Field>
-      email: <Input value={email} onChange={setEmail} />
-    </Field>
-    <Field>
-      password: <Input value={password} onChange={setPassword} type="password" />
-    </Field>
-    <SubmitButton onClick={() => onSubmit(email, password)} />
-  </React.Fragment>
-);
+}) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-const withUserFormState = compose(
-  withState('email', 'setEmail'),
-  withState('password', 'setPassword'),
-);
+  return (
+    <React.Fragment>
+      <Field>
+        email: <Input value={email} onChange={setEmail} />
+      </Field>
+      <Field>
+        password: <Input value={password} onChange={setPassword} type="password" />
+      </Field>
+      <SubmitButton onClick={() => onSubmit(email, password)} />
+    </React.Fragment>
+  );
+}
 
-export default withUserFormState(UserForm);
+export default UserForm;

@@ -42,7 +42,7 @@ export type FirebaseAuthProviderState = {
   error?: string;
 };
 
-const withFirebaseAuth = <P extends object> ({
+const withFirebaseAuth = <P extends object>({
   firebaseAppAuth,
   providers = {},
 }: HocParameters) => {
@@ -105,36 +105,36 @@ const withFirebaseAuth = <P extends object> ({
         });
 
       signOut = () => {
-        this.tryTo<void>(() => firebaseAppAuth.signOut())
+        this.tryTo<void>(() => firebaseAppAuth.signOut());
       };
 
       signInAnonymously = () => {
         this.tryTo<firebase.auth.UserCredential>(() =>
           firebaseAppAuth.signInAnonymously(),
         );
-      }
+      };
 
       signInWithGithub = () => {
-        this.tryToSignInWithProvider('githubProvider')
+        this.tryToSignInWithProvider('githubProvider');
       };
 
       signInWithTwitter = () => {
-        this.tryToSignInWithProvider('twitterProvider')
+        this.tryToSignInWithProvider('twitterProvider');
       };
 
       signInWithGoogle = () => {
-        this.tryToSignInWithProvider('googleProvider')
+        this.tryToSignInWithProvider('googleProvider');
       };
 
       signInWithFacebook = () => {
         this.tryToSignInWithProvider('facebookProvider');
-      }
+      };
 
       signInWithEmailAndPassword = (email: string, password: string) => {
         this.tryTo<firebase.auth.UserCredential>(() =>
           firebaseAppAuth.signInWithEmailAndPassword(email, password),
         );
-      }
+      };
 
       signInWithPhoneNumber = (
         phoneNumber: string,
@@ -146,13 +146,13 @@ const withFirebaseAuth = <P extends object> ({
             applicationVerifier,
           ),
         );
-      }
+      };
 
       createUserWithEmailAndPassword = (email: string, password: string) => {
         this.tryTo<firebase.auth.UserCredential>(() =>
           firebaseAppAuth.createUserWithEmailAndPassword(email, password),
         );
-      }
+      };
 
       sharedHandlers = {
         createUserWithEmailAndPassword: this.createUserWithEmailAndPassword,

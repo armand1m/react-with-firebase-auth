@@ -1,17 +1,17 @@
 import { PossibleProviders } from './';
 
 const providerToTypeMapper = {
-  googleProvider: 'firebase.auth.GoogleAuthProvider',
-  facebookProvider: 'firebase.auth.FacebookAuthProvider',
-  twitterProvider: 'firebase.auth.TwitterAuthProvider',
-  githubProvider: 'firebase.auth.GithubAuthProvider',
+  googleProvider: 'firebase.auth.GoogleAuthProvider' as const,
+  facebookProvider: 'firebase.auth.FacebookAuthProvider' as const,
+  twitterProvider: 'firebase.auth.TwitterAuthProvider' as const,
+  githubProvider: 'firebase.auth.GithubAuthProvider' as const,
 };
 
 const providerToFirebaseDocs = {
-  googleProvider: 'https://firebase.google.com/docs/auth/web/google-signin',
-  facebookProvider: 'https://firebase.google.com/docs/auth/web/facebook-signin',
-  twitterProvider: 'https://firebase.google.com/docs/auth/web/twitter-signin',
-  githubProvider: 'https://firebase.google.com/docs/auth/web/github-auth',
+  googleProvider: 'https://firebase.google.com/docs/auth/web/google-signin' as const,
+  facebookProvider: 'https://firebase.google.com/docs/auth/web/facebook-signin' as const,
+  twitterProvider: 'https://firebase.google.com/docs/auth/web/twitter-signin' as const,
+  githubProvider: 'https://firebase.google.com/docs/auth/web/github-auth' as const,
 };
 
 const getErrorMessageForProvider = (provider: PossibleProviders) =>

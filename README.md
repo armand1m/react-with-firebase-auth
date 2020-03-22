@@ -115,9 +115,6 @@ const App = ({
 }: WrappedComponentProps) => (
   <React.Fragment>
     {
-      loading && "Loading.."
-    }
-    {
       user
         ? <h1>Hello, {user.displayName}</h1>
         : <h1>Log in</h1>

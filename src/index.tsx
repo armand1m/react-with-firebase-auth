@@ -53,8 +53,9 @@ const withFirebaseAuth = <P extends object>({
       P,
       FirebaseAuthProviderState
     > {
-      static displayName = `withFirebaseAuth(${WrappedComponent.displayName ||
-        WrappedComponent.name})`;
+      static displayName = `withFirebaseAuth(${
+        WrappedComponent.displayName || WrappedComponent.name
+      })`;
 
       state = {
         loading: false,
@@ -66,7 +67,7 @@ const withFirebaseAuth = <P extends object>({
 
       componentDidMount() {
         this.unsubscribeAuthStateListener = firebaseAppAuth.onAuthStateChanged(
-          user => this.setState({ user }),
+          (user) => this.setState({ user }),
         );
       }
 
@@ -77,7 +78,7 @@ const withFirebaseAuth = <P extends object>({
       setError = (error: string) => this.setState({ error });
 
       toggleLoading = () => {
-        this.setState(currState => ({ loading: !currState.loading }));
+        this.setState((currState) => ({ loading: !currState.loading }));
       };
 
       async tryTo<T>(operation: () => Promise<T>) {

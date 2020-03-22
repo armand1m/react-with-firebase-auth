@@ -36,7 +36,7 @@ describe('withFirebaseAuth', () => {
     testAppAuth.signOut = jest.fn();
     testAppAuth.signInWithPopup = jest.fn();
     testAppAuth.signInWithPhoneNumber = jest.fn();
-    testAppAuth.onAuthStateChanged = jest.fn(observer => {
+    testAppAuth.onAuthStateChanged = jest.fn((observer) => {
       currentAuthStateObserver = observer;
       return unsubcribeAuthStateChangeMock;
     });

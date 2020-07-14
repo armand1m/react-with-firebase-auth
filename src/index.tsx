@@ -106,11 +106,11 @@ const withFirebaseAuth = <P extends object>({
         });
 
       signOut = () => {
-        this.tryTo<void>(() => firebaseAppAuth.signOut());
+        return this.tryTo<void>(() => firebaseAppAuth.signOut());
       };
 
       signInAnonymously = () => {
-        this.tryTo<firebase.auth.UserCredential>(() =>
+        return this.tryTo<firebase.auth.UserCredential>(() =>
           firebaseAppAuth.signInAnonymously(),
         );
       };
@@ -132,7 +132,7 @@ const withFirebaseAuth = <P extends object>({
       };
 
       signInWithEmailAndPassword = (email: string, password: string) => {
-        this.tryTo<firebase.auth.UserCredential>(() =>
+        return this.tryTo<firebase.auth.UserCredential>(() =>
           firebaseAppAuth.signInWithEmailAndPassword(email, password),
         );
       };
@@ -141,7 +141,7 @@ const withFirebaseAuth = <P extends object>({
         phoneNumber: string,
         applicationVerifier: firebase.auth.ApplicationVerifier,
       ) => {
-        this.tryTo<firebase.auth.ConfirmationResult>(() =>
+        return this.tryTo<firebase.auth.ConfirmationResult>(() =>
           firebaseAppAuth.signInWithPhoneNumber(
             phoneNumber,
             applicationVerifier,
@@ -150,7 +150,7 @@ const withFirebaseAuth = <P extends object>({
       };
 
       createUserWithEmailAndPassword = (email: string, password: string) => {
-        this.tryTo<firebase.auth.UserCredential>(() =>
+        return this.tryTo<firebase.auth.UserCredential>(() =>
           firebaseAppAuth.createUserWithEmailAndPassword(email, password),
         );
       };

@@ -115,21 +115,13 @@ const withFirebaseAuth = <P extends object>({
         );
       };
 
-      signInWithGithub = () => {
-        this.tryToSignInWithProvider('githubProvider');
-      };
+      signInWithGithub = () => this.tryToSignInWithProvider('githubProvider');
 
-      signInWithTwitter = () => {
-        this.tryToSignInWithProvider('twitterProvider');
-      };
+      signInWithTwitter = () => this.tryToSignInWithProvider('twitterProvider');
 
-      signInWithGoogle = () => {
-        this.tryToSignInWithProvider('googleProvider');
-      };
+      signInWithGoogle = () => this.tryToSignInWithProvider('googleProvider');
 
-      signInWithFacebook = () => {
-        this.tryToSignInWithProvider('facebookProvider');
-      };
+      signInWithFacebook = () => this.tryToSignInWithProvider('facebookProvider');
 
       signInWithEmailAndPassword = (email: string, password: string) => {
         return this.tryTo<firebase.auth.UserCredential>(() =>

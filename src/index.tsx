@@ -121,7 +121,8 @@ const withFirebaseAuth = <P extends object>({
 
       signInWithGoogle = () => this.tryToSignInWithProvider('googleProvider');
 
-      signInWithFacebook = () => this.tryToSignInWithProvider('facebookProvider');
+      signInWithFacebook = () =>
+        this.tryToSignInWithProvider('facebookProvider');
 
       signInWithEmailAndPassword = (email: string, password: string) => {
         return this.tryTo<firebase.auth.UserCredential>(() =>

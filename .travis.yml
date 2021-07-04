@@ -14,8 +14,8 @@ script:
   - yarn test
   - codecov -f coverage/*.json
 after_success:
-  - yarn travis-deploy-once "npx semantic-release"
-  - yarn travis-deploy-once "npm run deploy-example"
+  - yarn travis-deploy-once "yarn semantic-release"
+  - yarn travis-deploy-once "yarn deploy-example"
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/

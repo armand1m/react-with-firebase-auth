@@ -32,6 +32,8 @@
     "lint": "prettier --check 'src/**/*.{ts,tsx}'",
     "lint:fix": "prettier --write 'src/**/*.{ts,tsx}'",
     "prepare": "npm run build",
+    "semantic-release": "semantic-release",
+    "pack:inspect": "yarn pack && tar -ztvf *.tgz",
     "predeploy-example": "cross-env SKIP_PREFLIGHT_CHECK=true cd example && npm install && npm run build",
     "deploy-example": "gh-pages -d example/build",
     "travis-deploy-once": "travis-deploy-once"
@@ -82,5 +84,10 @@
       "./src/setupTests.ts"
     ]
   },
-  "dependencies": {}
+  "dependencies": {},
+  "release": {
+    "branches": [
+      "main"
+    ]
+  }
 }

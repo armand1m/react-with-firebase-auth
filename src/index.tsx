@@ -16,8 +16,8 @@ export type WrappedComponentProps = {
   ) => void;
   signInAnonymously: () => void;
   signOut: () => void;
-  setError: (error: string) => void;
- | null  user?: firebase.User | null;
+  setError: (error: string | null) => void;
+  user?: firebase.User | null;
   error?: string;
   loading: boolean;
 };

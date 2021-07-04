@@ -8,10 +8,14 @@ const providerToTypeMapper = {
 };
 
 const providerToFirebaseDocs = {
-  googleProvider: 'https://firebase.google.com/docs/auth/web/google-signin' as const,
-  facebookProvider: 'https://firebase.google.com/docs/auth/web/facebook-signin' as const,
-  twitterProvider: 'https://firebase.google.com/docs/auth/web/twitter-signin' as const,
-  githubProvider: 'https://firebase.google.com/docs/auth/web/github-auth' as const,
+  googleProvider:
+    'https://firebase.google.com/docs/auth/web/google-signin' as const,
+  facebookProvider:
+    'https://firebase.google.com/docs/auth/web/facebook-signin' as const,
+  twitterProvider:
+    'https://firebase.google.com/docs/auth/web/twitter-signin' as const,
+  githubProvider:
+    'https://firebase.google.com/docs/auth/web/github-auth' as const,
 };
 
 const getErrorMessageForProvider = (provider: PossibleProviders) =>

@@ -1,12 +1,12 @@
 import React from 'react'
-import * as firebase from 'firebase';
-import withFirebaseAuth from 'react-with-firebase-auth'
+import firebase from 'firebase';
+import withFirebaseAuth, {WrappedComponentProps} from 'react-with-firebase-auth'
 import firebaseConfig from './firebaseConfig';
 import UserForm from './UserForm';
 
-const firebaseApp = firebase.initializeApp(firebaseConfig);
+const firebaseApp = firebase.initializeApp(firebaseConfig); 
 
-const FormWrapper = ({ children }) =>
+const FormWrapper: React.FC = ({ children }) =>
   <>
     <div style={{ marginLeft: "1.34em" }}>
       {children}
@@ -30,7 +30,7 @@ const Loading = () => (
   </div>
 );
 
-const App = ({
+const App: React.FC<WrappedComponentProps> = ({
   user,
   error,
   loading,

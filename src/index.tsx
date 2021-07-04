@@ -12,11 +12,11 @@ export type WrappedComponentProps = {
   signInWithTwitter: () => void;
   signInWithPhoneNumber: (
     phoneNumber: string,
-    applicationVerifier: firebase.auth.ApplicationVerifier,
+    applicationVerifier: firebase.auth.ApplicationVerifier
   ) => void;
   signInAnonymously: () => void;
   signOut: () => void;
-  setError: (error: string) => void;
+  setError: (error: string | null) => void;
   user?: firebase.User | null;
   error?: string;
   loading: boolean;
@@ -39,15 +39,15 @@ export type HocParameters = {
 export type FirebaseAuthProviderState = {
   loading: boolean;
   user?: firebase.User | null;
-  error?: string;
+  error?: string | null;
 };
 
-const withFirebaseAuth = <P extends object>({
+const withFirebaseAuth = ({
   firebaseAppAuth,
   providers = {},
 }: HocParameters) => {
-  return function createComponentWithAuth(
-    WrappedComponent: React.ComponentType<P & WrappedComponentProps>,
+  return function createComponentWithAuth<P>(
+    WrappedComponent: React.ComponentType<P & WrappedComponentProps>
   ) {
     return class FirebaseAuthProvider extends React.PureComponent<
       P,
@@ -63,19 +63,21 @@ const withFirebaseAuth = <P extends object>({
         error: undefined,
       };
 
-      unsubscribeAuthStateListener: firebase.Unsubscribe;
+      unsubscribeAuthStateListener: firebase.Unsubscribe | undefined;
 
       componentDidMount() {
         this.unsubscribeAuthStateListener = firebaseAppAuth.onAuthStateChanged(
-          (user) => this.setState({ user }),
+          (user) => this.setState({ user })
         );
       }
 
       componentWillUnmount() {
-        this.unsubscribeAuthStateListener();
+        if (this.unsubscribeAuthStateListener) {
+          this.unsubscribeAuthStateListener();
+        }
       }
 
-      setError = (error: string) => this.setState({ error });
+      setError = (error: string | null) => this.setState({ error });
 
       toggleLoading = () => {
         this.setState((currState) => ({ loading: !currState.loading }));
@@ -111,7 +113,7 @@ const withFirebaseAuth = <P extends object>({
 
       signInAnonymously = () => {
         return this.tryTo<firebase.auth.UserCredential>(() =>
-          firebaseAppAuth.signInAnonymously(),
+          firebaseAppAuth.signInAnonymously()
         );
       };
 
@@ -126,25 +128,25 @@ const withFirebaseAuth = <P extends object>({
 
       signInWithEmailAndPassword = (email: string, password: string) => {
         return this.tryTo<firebase.auth.UserCredential>(() =>
-          firebaseAppAuth.signInWithEmailAndPassword(email, password),
+          firebaseAppAuth.signInWithEmailAndPassword(email, password)
         );
       };
 
       signInWithPhoneNumber = (
         phoneNumber: string,
-        applicationVerifier: firebase.auth.ApplicationVerifier,
+        applicationVerifier: firebase.auth.ApplicationVerifier
       ) => {
         return this.tryTo<firebase.auth.ConfirmationResult>(() =>
           firebaseAppAuth.signInWithPhoneNumber(
             phoneNumber,
-            applicationVerifier,
-          ),
+            applicationVerifier
+          )
         );
       };
 
       createUserWithEmailAndPassword = (email: string, password: string) => {
         return this.tryTo<firebase.auth.UserCredential>(() =>
-          firebaseAppAuth.createUserWithEmailAndPassword(email, password),
+          firebaseAppAuth.createUserWithEmailAndPassword(email, password)
         );
       };
 

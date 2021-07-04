@@ -1,12 +1,16 @@
 {
   "name": "react-with-firebase-auth",
-  "version": "1.0.0",
+  "version": "1.3.2",
   "description": "Higher Order Component for integrating Firebase with a React Component",
   "author": "armand1m",
   "license": "MIT",
-  "repository": "armand1m/react-with-firebase-auth",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/armand1m/react-with-firebase-auth.git"
+  },
   "main": "dist/index.js",
   "module": "dist/index.es.js",
+  "typings": "dist/index.d.ts",
   "jsnext:main": "dist/index.es.js",
   "keywords": [
     "react",
@@ -25,6 +29,22 @@
     "node": ">=8",
     "npm": ">=5"
   },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "size-limit": [
+    {
+      "path": "dist/index.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/index.es.js",
+      "limit": "10 KB"
+    }
+  ],
   "scripts": {
     "test": "jest --coverage",
     "build": "rollup -c",
@@ -32,9 +52,10 @@
     "lint": "prettier --check 'src/**/*.{ts,tsx}'",
     "lint:fix": "prettier --write 'src/**/*.{ts,tsx}'",
     "prepare": "npm run build",
-    "predeploy-example": "cross-env SKIP_PREFLIGHT_CHECK=true cd example && npm install && npm run build",
-    "deploy-example": "gh-pages -d example/build",
-    "travis-deploy-once": "travis-deploy-once"
+    "semantic-release": "semantic-release",
+    "pack:inspect": "yarn pack && tar -ztvf *.tgz",
+    "predeploy-example": "cross-env SKIP_PREFLIGHT_CHECK=true cd example && yarn && yarn build",
+    "deploy-example": "gh-pages -d example/build"
   },
   "peerDependencies": {
     "firebase": "^8.6.8",
@@ -44,6 +65,11 @@
   "devDependencies": {
     "@babel/core": "^7.14.6",
     "@babel/runtime": "^7.14.6",
+    "@rollup/plugin-commonjs": "^19.0.0",
+    "@rollup/plugin-node-resolve": "^13.0.0",
+    "@rollup/plugin-typescript": "^8.2.1",
+    "@rollup/plugin-url": "^6.0.0",
+    "@size-limit/preset-small-lib": "^4.9.1",
     "@types/enzyme": "^3.10.8",
     "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/firebase": "^3.2.1",
@@ -52,6 +78,7 @@
     "@types/react": "^17.0.13",
     "@types/react-dom": "^17.0.8",
     "codecov": "^3.8.2",
+    "core-js": "3",
     "cross-env": "^7.0.3",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
@@ -61,15 +88,11 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "rollup": "^2.52.6",
-    "rollup-plugin-babel": "^4.4.0",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-typescript2": "^0.30.0",
-    "rollup-plugin-url": "^3.0.1",
     "semantic-release": "^17.4.4",
-    "travis-deploy-once": "^5.0.11",
+    "size-limit": "^4.9.1",
     "ts-jest": "^27.0.3",
+    "tslib": "^2.3.0",
     "typescript": "^4.3.5"
   },
   "files": [
@@ -82,5 +105,10 @@
       "./src/setupTests.ts"
     ]
   },
-  "dependencies": {}
+  "dependencies": {},
+  "release": {
+    "branches": [
+      "master"
+    ]
+  }
 }

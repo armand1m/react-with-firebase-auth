@@ -23,7 +23,7 @@ type AuthStateObserver =
 
 describe('withFirebaseAuth', () => {
   let currentAuthStateObserver: AuthStateObserver = (
-    _user: firebase.User | null,
+    _user: firebase.User | null
   ) => {};
   let unsubcribeAuthStateChangeMock = jest.fn();
 
@@ -183,7 +183,7 @@ describe('withFirebaseAuth', () => {
     wrapped.find('button').simulate('click');
 
     expect(testAppAuth.signInWithPopup).toHaveBeenCalledWith(
-      providers.googleProvider,
+      providers.googleProvider
     );
   });
 
@@ -202,7 +202,7 @@ describe('withFirebaseAuth', () => {
     wrapped.find('button').simulate('click');
 
     expect(testAppAuth.signInWithPopup).toHaveBeenCalledWith(
-      providers.twitterProvider,
+      providers.twitterProvider
     );
   });
 
@@ -223,7 +223,7 @@ describe('withFirebaseAuth', () => {
     wrapped.find('button').simulate('click');
 
     expect(testAppAuth.signInWithPopup).toHaveBeenCalledWith(
-      providers.facebookProvider,
+      providers.facebookProvider
     );
   });
 
@@ -242,7 +242,7 @@ describe('withFirebaseAuth', () => {
     wrapped.find('button').simulate('click');
 
     expect(testAppAuth.signInWithPopup).toHaveBeenCalledWith(
-      providers.githubProvider,
+      providers.githubProvider
     );
   });
 
@@ -268,7 +268,7 @@ describe('withFirebaseAuth', () => {
 
     expect(testAppAuth.createUserWithEmailAndPassword).toHaveBeenCalledWith(
       email,
-      password,
+      password
     );
   });
 
@@ -296,7 +296,7 @@ describe('withFirebaseAuth', () => {
 
     expect(testAppAuth.signInWithPhoneNumber).toHaveBeenCalledWith(
       phoneNumber,
-      applicationVerifier,
+      applicationVerifier
     );
   });
 
@@ -333,7 +333,7 @@ describe('withFirebaseAuth', () => {
     wrapped.find('button').simulate('click');
 
     expect(wrapped.state('error')).toContain(
-      'Please provide an instance of firebase.auth.GithubAuthProvider',
+      'Please provide an instance of firebase.auth.GithubAuthProvider'
     );
   });
 });

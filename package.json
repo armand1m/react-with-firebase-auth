@@ -4,9 +4,13 @@
   "description": "Higher Order Component for integrating Firebase with a React Component",
   "author": "armand1m",
   "license": "MIT",
-  "repository": "armand1m/react-with-firebase-auth",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/armand1m/react-with-firebase-auth.git"
+  },
   "main": "dist/index.js",
   "module": "dist/index.es.js",
+  "typings": "dist/index.d.ts",
   "jsnext:main": "dist/index.es.js",
   "keywords": [
     "react",
@@ -25,6 +29,22 @@
     "node": ">=8",
     "npm": ">=5"
   },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "size-limit": [
+    {
+      "path": "dist/react-query-filter.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/react-query-filter.esm.js",
+      "limit": "10 KB"
+    }
+  ],
   "scripts": {
     "test": "jest --coverage",
     "build": "rollup -c",

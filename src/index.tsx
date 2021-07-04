@@ -12,7 +12,7 @@ export type WrappedComponentProps = {
   signInWithTwitter: () => void;
   signInWithPhoneNumber: (
     phoneNumber: string,
-    applicationVerifier: firebase.auth.ApplicationVerifier,
+    applicationVerifier: firebase.auth.ApplicationVerifier
   ) => void;
   signInAnonymously: () => void;
   signOut: () => void;
@@ -47,7 +47,7 @@ const withFirebaseAuth = ({
   providers = {},
 }: HocParameters) => {
   return function createComponentWithAuth<P>(
-    WrappedComponent: React.ComponentType<P & WrappedComponentProps>,
+    WrappedComponent: React.ComponentType<P & WrappedComponentProps>
   ) {
     return class FirebaseAuthProvider extends React.PureComponent<
       P,
@@ -67,7 +67,7 @@ const withFirebaseAuth = ({
 
       componentDidMount() {
         this.unsubscribeAuthStateListener = firebaseAppAuth.onAuthStateChanged(
-          (user) => this.setState({ user }),
+          (user) => this.setState({ user })
         );
       }
 
@@ -113,7 +113,7 @@ const withFirebaseAuth = ({
 
       signInAnonymously = () => {
         return this.tryTo<firebase.auth.UserCredential>(() =>
-          firebaseAppAuth.signInAnonymously(),
+          firebaseAppAuth.signInAnonymously()
         );
       };
 
@@ -128,25 +128,25 @@ const withFirebaseAuth = ({
 
       signInWithEmailAndPassword = (email: string, password: string) => {
         return this.tryTo<firebase.auth.UserCredential>(() =>
-          firebaseAppAuth.signInWithEmailAndPassword(email, password),
+          firebaseAppAuth.signInWithEmailAndPassword(email, password)
         );
       };
 
       signInWithPhoneNumber = (
         phoneNumber: string,
-        applicationVerifier: firebase.auth.ApplicationVerifier,
+        applicationVerifier: firebase.auth.ApplicationVerifier
       ) => {
         return this.tryTo<firebase.auth.ConfirmationResult>(() =>
           firebaseAppAuth.signInWithPhoneNumber(
             phoneNumber,
-            applicationVerifier,
-          ),
+            applicationVerifier
+          )
         );
       };
 
       createUserWithEmailAndPassword = (email: string, password: string) => {
         return this.tryTo<firebase.auth.UserCredential>(() =>
-          firebaseAppAuth.createUserWithEmailAndPassword(email, password),
+          firebaseAppAuth.createUserWithEmailAndPassword(email, password)
         );
       };
 

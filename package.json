@@ -10,7 +10,7 @@
   },
   "main": "dist/index.js",
   "module": "dist/index.es.js",
-  "typings": "dist/index.d.ts",
+  "typings": "dist/types/index.d.ts",
   "jsnext:main": "dist/index.es.js",
   "keywords": [
     "react",

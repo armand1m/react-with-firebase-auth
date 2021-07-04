@@ -20,13 +20,15 @@ export default {
       format: 'es',
       exports: 'named',
       sourcemap: true
-    }
+    },
   ],
   plugins: [
     external(),
     url(),
     resolve(),
-    typescript(),
+    typescript({
+      tsconfig: './tsconfig.json',
+    }),
     commonjs()
   ]
 }

@@ -35,5 +35,8 @@ jobs:
         run: yarn semantic-release
 
       - name: Deploy Example
+        env:
+          GIT_AUTHOR_NAME: Github Actions
+          GIT_AUTHOR_EMAIL: actions@github.com
         if: ${{ github.ref == 'refs/heads/master' }}
         run: yarn deploy-example 

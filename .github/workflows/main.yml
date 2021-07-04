@@ -44,5 +44,5 @@ jobs:
         run: yarn semantic-release
 
       - name: Deploy Example
-        if: github.ref === 'refs/heads/master'
+        if: ${{ github.ref == 'refs/heads/master' }}
         run: yarn deploy-example 

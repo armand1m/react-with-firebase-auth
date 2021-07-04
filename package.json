@@ -54,7 +54,7 @@
     "prepare": "npm run build",
     "semantic-release": "semantic-release",
     "pack:inspect": "yarn pack && tar -ztvf *.tgz",
-    "predeploy-example": "cross-env SKIP_PREFLIGHT_CHECK=true cd example && yarn && yarn build",
+    "predeploy-example": "SKIP_PREFLIGHT_CHECK=true cd example && yarn && yarn build",
     "deploy-example": "gh-pages -d example/build"
   },
   "peerDependencies": {

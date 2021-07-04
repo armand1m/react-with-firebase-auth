@@ -1,31 +1,33 @@
-import React from 'react'
+import React from 'react';
 import firebase from 'firebase';
-import withFirebaseAuth, {WrappedComponentProps} from 'react-with-firebase-auth'
+import withFirebaseAuth, {
+  WrappedComponentProps,
+} from 'react-with-firebase-auth';
 import firebaseConfig from './firebaseConfig';
 import UserForm from './UserForm';
 
-const firebaseApp = firebase.initializeApp(firebaseConfig); 
+const firebaseApp = firebase.initializeApp(firebaseConfig);
 
-const FormWrapper: React.FC = ({ children }) =>
+const FormWrapper: React.FC = ({ children }) => (
   <>
-    <div style={{ marginLeft: "1.34em" }}>
-      {children}
-    </div>
+    <div style={{ marginLeft: '1.34em' }}>{children}</div>
     <hr />
-  </>;
+  </>
+);
 
 const Loading = () => (
-  <div style={{
-    position: "fixed",
-    display: "flex",
-    top: 0,
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-    height: "2.68em",
-    background: "green",
-    color: "white",
-  }}>
+  <div
+    style={{
+      position: 'fixed',
+      display: 'flex',
+      top: 0,
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '100%',
+      height: '2.68em',
+      background: 'green',
+      color: 'white',
+    }}>
     Loading..
   </div>
 );
@@ -90,7 +92,10 @@ const App: React.FC<WrappedComponentProps> = ({
 
     <FormWrapper>
       <h1>user data</h1>
-      <textarea style={{ width: 350, height: 200 }} value={JSON.stringify(user, null, 2)} />
+      <textarea
+        style={{ width: 350, height: 200 }}
+        value={JSON.stringify(user, null, 2)}
+      />
     </FormWrapper>
 
     <FormWrapper>

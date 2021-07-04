@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/static/js/main.b3d56a7b.chunk.js",
-    "main.js.map": "/static/js/main.b3d56a7b.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.674594fa.js",
-    "runtime-main.js.map": "/static/js/runtime-main.674594fa.js.map",
-    "static/js/2.627d331d.chunk.js": "/static/js/2.627d331d.chunk.js",
-    "static/js/2.627d331d.chunk.js.map": "/static/js/2.627d331d.chunk.js.map",
-    "static/js/3.42dd0e3a.chunk.js": "/static/js/3.42dd0e3a.chunk.js",
-    "static/js/3.42dd0e3a.chunk.js.map": "/static/js/3.42dd0e3a.chunk.js.map",
-    "index.html": "/index.html",
-    "static/js/2.627d331d.chunk.js.LICENSE.txt": "/static/js/2.627d331d.chunk.js.LICENSE.txt"
+    "main.js": "https://armand1m.github.io/react-with-firebase-auth/static/js/main.b3d56a7b.chunk.js",
+    "main.js.map": "https://armand1m.github.io/react-with-firebase-auth/static/js/main.b3d56a7b.chunk.js.map",
+    "runtime-main.js": "https://armand1m.github.io/react-with-firebase-auth/static/js/runtime-main.dd1b2d34.js",
+    "runtime-main.js.map": "https://armand1m.github.io/react-with-firebase-auth/static/js/runtime-main.dd1b2d34.js.map",
+    "static/js/2.358f0270.chunk.js": "https://armand1m.github.io/react-with-firebase-auth/static/js/2.358f0270.chunk.js",
+    "static/js/2.358f0270.chunk.js.map": "https://armand1m.github.io/react-with-firebase-auth/static/js/2.358f0270.chunk.js.map",
+    "static/js/3.42dd0e3a.chunk.js": "https://armand1m.github.io/react-with-firebase-auth/static/js/3.42dd0e3a.chunk.js",
+    "static/js/3.42dd0e3a.chunk.js.map": "https://armand1m.github.io/react-with-firebase-auth/static/js/3.42dd0e3a.chunk.js.map",
+    "index.html": "https://armand1m.github.io/react-with-firebase-auth/index.html",
+    "static/js/2.358f0270.chunk.js.LICENSE.txt": "https://armand1m.github.io/react-with-firebase-auth/static/js/2.358f0270.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.674594fa.js",
-    "static/js/2.627d331d.chunk.js",
+    "static/js/runtime-main.dd1b2d34.js",
+    "static/js/2.358f0270.chunk.js",
     "static/js/main.b3d56a7b.chunk.js"
   ]
 }

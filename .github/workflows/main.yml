@@ -28,6 +28,9 @@ jobs:
       - name: Test
         run: yarn test --ci --coverage --maxWorkers=2
 
+      - name: Coverage 
+        run: codecov -f coverage/*.json 
+
       - name: Build
         run: yarn build
 
@@ -39,3 +42,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: yarn semantic-release
+
+      - name: Deploy Example
+        if: github.ref === 'refs/heads/master'
+        run: yarn deploy-example 

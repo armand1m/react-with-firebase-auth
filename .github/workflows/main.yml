@@ -2,7 +2,7 @@ name: CI
 on: [push]
 jobs:
   build:
-    name: Lint, test, build and release on Node 16 
+    name: Build, lint, test and release on Node 16 
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -24,9 +24,6 @@ jobs:
 
       - name: Coverage 
         run: npx codecov -f coverage/*.json 
-
-      - name: Build
-        run: yarn build
 
       - name: Pack Inspect
         run: yarn pack:inspect

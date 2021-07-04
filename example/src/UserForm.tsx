@@ -1,38 +1,50 @@
-import React, { ButtonHTMLAttributes, DetailedHTMLProps, InputHTMLAttributes, useState } from 'react';
+import React, {
+  ButtonHTMLAttributes,
+  DetailedHTMLProps,
+  InputHTMLAttributes,
+  useState,
+} from 'react';
 
-const Field: React.FC = ({ children }) =>
+const Field: React.FC = ({ children }) => (
   <>
     {children}
     <br />
-  </>;
+  </>
+);
 
-type HTMLInputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+type HTMLInputProps = DetailedHTMLProps<
+  InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
+>;
 
 type InputProps = Omit<HTMLInputProps, 'onChange'> & {
   onChange: (value: string) => void;
-} 
+};
 
-const Input = ({ value, onChange, ...props }: InputProps) =>
+const Input = ({ value, onChange, ...props }: InputProps) => (
   <input
     {...props}
     value={value}
-    onChange={event => onChange(event.target.value)}
-  />;
+    onChange={(event) => onChange(event.target.value)}
+  />
+);
 
-type ButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
+type ButtonProps = DetailedHTMLProps<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+>;
 
-const SubmitButton = (props: ButtonProps) =>
-  <button {...props}>submit</button>;
+const SubmitButton = (props: ButtonProps) => (
+  <button {...props}>submit</button>
+);
 
 type UserFormProps = {
   onSubmit: (email: string, password: string) => void;
-}
+};
 
-const UserForm = ({
-  onSubmit,
-}: UserFormProps) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const UserForm = ({ onSubmit }: UserFormProps) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
     <React.Fragment>
@@ -40,11 +52,16 @@ const UserForm = ({
         email: <Input value={email} onChange={setEmail} />
       </Field>
       <Field>
-        password: <Input value={password} onChange={setPassword} type="password" />
+        password:{' '}
+        <Input
+          value={password}
+          onChange={setPassword}
+          type="password"
+        />
       </Field>
       <SubmitButton onClick={() => onSubmit(email, password)} />
     </React.Fragment>
   );
-}
+};
 
 export default UserForm;

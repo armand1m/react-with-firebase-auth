@@ -39,6 +39,13 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: yarn semantic-release
 
-      - name: Deploy Example
+      - name: Build Example
         if: ${{ github.ref == 'refs/heads/master' }}
-        run: yarn deploy-example 
+        run: yarn build:example 
+
+      - name: Deploy Example
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.ref == 'refs/heads/master' }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./example/build

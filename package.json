@@ -54,8 +54,7 @@
     "prepare": "npm run build",
     "semantic-release": "semantic-release",
     "pack:inspect": "yarn pack && tar -ztvf *.tgz",
-    "predeploy-example": "cd example && yarn && yarn build",
-    "deploy-example": "gh-pages -d example/build"
+    "build:example": "cd example && yarn && yarn build"
   },
   "peerDependencies": {
     "firebase": "^8.6.8",

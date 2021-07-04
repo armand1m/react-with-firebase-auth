@@ -87,7 +87,7 @@
   "dependencies": {},
   "release": {
     "branches": [
-      "main"
+      "master"
     ]
   }
 }

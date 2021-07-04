@@ -50,6 +50,7 @@
     "@rollup/plugin-node-resolve": "^13.0.0",
     "@rollup/plugin-typescript": "^8.2.1",
     "@rollup/plugin-url": "^6.0.0",
+    "@size-limit/preset-small-lib": "^5.0.1",
     "@types/enzyme": "^3.10.8",
     "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/firebase": "^3.2.1",

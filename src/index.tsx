@@ -17,7 +17,7 @@ export type WrappedComponentProps = {
   signInAnonymously: () => void;
   signOut: () => void;
   setError: (error: string) => void;
-  user?: firebase.User | null;
+ | null  user?: firebase.User | null;
   error?: string;
   loading: boolean;
 };
@@ -39,14 +39,14 @@ export type HocParameters = {
 export type FirebaseAuthProviderState = {
   loading: boolean;
   user?: firebase.User | null;
-  error?: string;
+  error?: string | null;
 };
 
-const withFirebaseAuth = <P extends object>({
+const withFirebaseAuth = ({
   firebaseAppAuth,
   providers = {},
 }: HocParameters) => {
-  return function createComponentWithAuth(
+  return function createComponentWithAuth<P>(
     WrappedComponent: React.ComponentType<P & WrappedComponentProps>,
   ) {
     return class FirebaseAuthProvider extends React.PureComponent<
@@ -63,7 +63,7 @@ const withFirebaseAuth = <P extends object>({
         error: undefined,
       };
 
-      unsubscribeAuthStateListener: firebase.Unsubscribe;
+      unsubscribeAuthStateListener: firebase.Unsubscribe | undefined;
 
       componentDidMount() {
         this.unsubscribeAuthStateListener = firebaseAppAuth.onAuthStateChanged(
@@ -72,10 +72,12 @@ const withFirebaseAuth = <P extends object>({
       }
 
       componentWillUnmount() {
-        this.unsubscribeAuthStateListener();
+        if (this.unsubscribeAuthStateListener) {
+          this.unsubscribeAuthStateListener();
+        }
       }
 
-      setError = (error: string) => this.setState({ error });
+      setError = (error: string | null) => this.setState({ error });
 
       toggleLoading = () => {
         this.setState((currState) => ({ loading: !currState.loading }));

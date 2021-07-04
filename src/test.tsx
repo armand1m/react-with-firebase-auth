@@ -23,7 +23,7 @@ type AuthStateObserver =
 
 describe('withFirebaseAuth', () => {
   let currentAuthStateObserver: AuthStateObserver = (
-    _user: firebase.User,
+    _user: firebase.User | null,
   ) => {};
   let unsubcribeAuthStateChangeMock = jest.fn();
 

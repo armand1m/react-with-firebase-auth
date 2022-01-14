@@ -11,6 +11,7 @@ const providers = {
   twitterProvider: {} as firebase.auth.TwitterAuthProvider_Instance,
   githubProvider: {} as firebase.auth.GithubAuthProvider_Instance,
   facebookProvider: {} as firebase.auth.FacebookAuthProvider_Instance,
+  appleProvider: {} as firebase.auth.OAuthProvider,
 };
 
 const fakeUser = {
@@ -211,6 +212,25 @@ describe('withFirebaseAuth', () => {
       signInWithFacebook,
     }: WrappedComponentProps) => (
       <button onClick={() => signInWithFacebook()}>signInWithFacebook</button>
+    );
+
+    const EnhancedComponent = withFirebaseAuth({
+      firebaseAppAuth: testAppAuth,
+      providers,
+    })(WrappedComponent);
+
+    const wrapped = mount(<EnhancedComponent />);
+
+    wrapped.find('button').simulate('click');
+
+    expect(testAppAuth.signInWithPopup).toHaveBeenCalledWith(
+      providers.facebookProvider
+    );
+  });
+
+  it('should call signInWithPopup with appleProvider instance when signInWithApple prop is invoked', () => {
+    const WrappedComponent = ({ signInWithApple }: WrappedComponentProps) => (
+      <button onClick={() => signInWithApple()}>signInWithApple</button>
     );
 
     const EnhancedComponent = withFirebaseAuth({

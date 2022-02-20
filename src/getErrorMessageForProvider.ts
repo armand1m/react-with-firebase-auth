@@ -5,6 +5,7 @@ const providerToTypeMapper = {
   facebookProvider: 'firebase.auth.FacebookAuthProvider' as const,
   twitterProvider: 'firebase.auth.TwitterAuthProvider' as const,
   githubProvider: 'firebase.auth.GithubAuthProvider' as const,
+  appleProvider: 'firebase.auth.OAuthProvider' as const,
 };
 
 const providerToFirebaseDocs = {
@@ -16,6 +17,7 @@ const providerToFirebaseDocs = {
     'https://firebase.google.com/docs/auth/web/twitter-signin' as const,
   githubProvider:
     'https://firebase.google.com/docs/auth/web/github-auth' as const,
+  appleProvider: 'https://firebase.google.com/docs/auth/web/apple' as const,
 };
 
 const getErrorMessageForProvider = (provider: PossibleProviders) =>

@@ -42,6 +42,7 @@ const App: React.FC<WrappedComponentProps> = ({
   signInWithEmailAndPassword,
   signInWithGoogle,
   signInWithGithub,
+  signInWithApple,
   createUserWithEmailAndPassword,
 }) => (
   <React.Fragment>
@@ -66,6 +67,11 @@ const App: React.FC<WrappedComponentProps> = ({
     <FormWrapper>
       <h1>sign in with google</h1>
       <button onClick={signInWithGoogle}>sign in with google</button>
+    </FormWrapper>
+
+    <FormWrapper>
+      <h1>sign in with apple</h1>
+      <button onClick={signInWithApple}>sign in with apple</button>
     </FormWrapper>
 
     <FormWrapper>
@@ -109,6 +115,7 @@ const firebaseAppAuth = firebaseApp.auth();
 
 const providers = {
   googleProvider: new firebase.auth.GoogleAuthProvider(),
+  appleProvider: new firebase.auth.OAuthProvider('apple.com'),
 };
 
 export default withFirebaseAuth({

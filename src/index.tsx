@@ -10,6 +10,7 @@ export type WrappedComponentProps = {
   signInWithFacebook: () => void;
   signInWithGithub: () => void;
   signInWithTwitter: () => void;
+  signInWithApple: () => void;
   signInWithPhoneNumber: (
     phoneNumber: string,
     applicationVerifier: firebase.auth.ApplicationVerifier
@@ -29,6 +30,7 @@ export type ProvidersMapper = {
   facebookProvider?: firebase.auth.FacebookAuthProvider_Instance;
   twitterProvider?: firebase.auth.TwitterAuthProvider_Instance;
   githubProvider?: firebase.auth.GithubAuthProvider_Instance;
+  appleProvider?: firebase.auth.OAuthProvider;
 };
 
 export type HocParameters = {
@@ -126,6 +128,8 @@ const withFirebaseAuth = ({
       signInWithFacebook = () =>
         this.tryToSignInWithProvider('facebookProvider');
 
+      signInWithApple = () => this.tryToSignInWithProvider('appleProvider');
+
       signInWithEmailAndPassword = (email: string, password: string) => {
         return this.tryTo<firebase.auth.UserCredential>(() =>
           firebaseAppAuth.signInWithEmailAndPassword(email, password)
@@ -157,6 +161,7 @@ const withFirebaseAuth = ({
         signInWithTwitter: this.signInWithTwitter,
         signInWithGoogle: this.signInWithGoogle,
         signInWithFacebook: this.signInWithFacebook,
+        signInWithApple: this.signInWithApple,
         signInWithPhoneNumber: this.signInWithPhoneNumber,
         signInAnonymously: this.signInAnonymously,
         setError: this.setError,

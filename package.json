@@ -1,6 +1,6 @@
 {
   "name": "react-with-firebase-auth",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Higher Order Component for integrating Firebase with a React Component",
   "author": "armand1m",
   "license": "MIT",

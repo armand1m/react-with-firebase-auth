@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/armand1m/react-with-firebase-auth/compare/v1.4.0...v1.4.1) (2022-04-05)
+
+
+### Bug Fixes
+
+* **google-auth:** fix google auth provider instance type ([a2a3ca8](https://github.com/armand1m/react-with-firebase-auth/commit/a2a3ca8effcd72d100062ce81ffc8195fbfa33b9))
+
 # [1.4.0](https://github.com/armand1m/react-with-firebase-auth/compare/v1.3.11...v1.4.0) (2022-02-20)
 
 

@@ -26,7 +26,7 @@ export type WrappedComponentProps = {
 export type PossibleProviders = keyof ProvidersMapper;
 
 export type ProvidersMapper = {
-  googleProvider?: firebase.auth.GithubAuthProvider_Instance;
+  googleProvider?: firebase.auth.GoogleAuthProvider_Instance;
   facebookProvider?: firebase.auth.FacebookAuthProvider_Instance;
   twitterProvider?: firebase.auth.TwitterAuthProvider_Instance;
   githubProvider?: firebase.auth.GithubAuthProvider_Instance;

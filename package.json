@@ -47,6 +47,7 @@
   ],
   "scripts": {
     "test": "jest --coverage",
+    "test-watch": "jest --watch",
     "build": "rollup -c",
     "start": "rollup -c -w",
     "lint": "prettier --check 'src/**/*.{ts,tsx}'",
@@ -57,7 +58,7 @@
     "build:example": "cd example && yarn && yarn build"
   },
   "peerDependencies": {
-    "firebase": "^8.6.8",
+    "firebase": "^9.8.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
@@ -108,7 +109,6 @@
       "./src/setupTests.ts"
     ]
   },
-  "dependencies": {},
   "release": {
     "branches": [
       "master"

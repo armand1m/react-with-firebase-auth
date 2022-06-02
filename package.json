@@ -1,12 +1,12 @@
 {
   "name": "react-with-firebase-auth",
-  "version": "1.4.1",
+  "version": "1.5.1",
   "description": "Higher Order Component for integrating Firebase with a React Component",
   "author": "armand1m",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/armand1m/react-with-firebase-auth.git"
+    "url": "https://github.com/fotoflo/react-with-firebase-auth/tree/firebase9"
   },
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -47,6 +47,7 @@
   ],
   "scripts": {
     "test": "jest --coverage",
+    "test-watch": "jest --watch --coverage",
     "build": "rollup -c",
     "start": "rollup -c -w",
     "lint": "prettier --check 'src/**/*.{ts,tsx}'",
@@ -54,12 +55,13 @@
     "prepare": "npm run build",
     "semantic-release": "semantic-release",
     "pack:inspect": "yarn pack && tar -ztvf *.tgz",
-    "build:example": "cd example && yarn && yarn build"
+    "build:example": "cd example && yarn && yarn build",
+    "postinstall": "cd ./node_modules/react-with-firebase-auth && npm install && npm run build"
   },
   "peerDependencies": {
-    "firebase": "^8.6.8",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "firebase": "^9.8.2",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
@@ -108,7 +110,6 @@
       "./src/setupTests.ts"
     ]
   },
-  "dependencies": {},
   "release": {
     "branches": [
       "master"

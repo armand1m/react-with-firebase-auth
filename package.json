@@ -92,7 +92,7 @@
     "react-dom": "^16.13.1",
     "rollup": "^2.52.6",
     "rollup-plugin-peer-deps-external": "^2.2.4",
-    "semantic-release": "^17.4.4",
+    "semantic-release": "^19.0.3",
     "size-limit": "^4.9.1",
     "ts-jest": "^27.0.3",
     "tslib": "^2.3.0",
